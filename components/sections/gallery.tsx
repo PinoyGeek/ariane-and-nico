@@ -8,7 +8,15 @@ import { Cormorant_Garamond, Cinzel } from "next/font/google"
 import { Section } from "@/components/section"
 // Removed circular gallery in favor of a responsive masonry layout
 
-// Match Details section typography & warm brown palette
+// Wedding palette — match hero section
+const palette = {
+  deep: "#45301F",
+  medium: "#875F2C",
+  sage: "#A2976A",
+  cream: "#F5D8B0",
+  terracotta: "#8F553D",
+} as const
+
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400"],
@@ -16,19 +24,18 @@ const cormorant = Cormorant_Garamond({
 
 const cinzel = Cinzel({
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["400", "600"],
 })
 
-const GALLERY_TEXT = "#9B6A41"
 const GALLERY_DECO_FILTER =
-  "brightness(0) saturate(100%) invert(32%) sepia(55%) saturate(900%) hue-rotate(355deg) brightness(95%) contrast(90%)"
+  "brightness(0) saturate(100%) invert(18%) sepia(35%) saturate(1200%) hue-rotate(15deg) brightness(92%) contrast(88%)"
 
 const galleryItems = [
-  { image: "/mobile-background/couple (1).webp", text: " " },   
-  { image: "/desktop-background/couple (1).webp", text: " " },
+  { image: "/mobile-background/couple (15).webp", text: " " },   
   { image: "/mobile-background/couple (3).webp", text: " " },
-  { image: "/mobile-background/couple (4).webp", text: " " },
-  { image: "/desktop-background/couple (2).webp", text: " " },
+  { image: "/mobile-background/couple (6).webp", text: " " },
+  { image: "/mobile-background/couple (10).webp", text: " " },
+  { image: "/mobile-background/couple (11).webp", text: " " },
 
 
 
@@ -109,10 +116,28 @@ export function Gallery() {
   }
 
   return (
-    <Section
-      id="gallery"
-      className="relative py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden bg-white"
+    <div
+      className="relative w-full"
+      style={{ backgroundColor: palette.cream }}
     >
+      {/* Full-bleed layered background — same as hero (inline styles so it always applies) */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden>
+        <div
+          className="absolute inset-0 opacity-[0.35]"
+          style={{
+            background: `linear-gradient(165deg, ${palette.cream} 0%, ${palette.sage}18 40%, ${palette.medium}08 70%, ${palette.deep}06 100%)`,
+          }}
+        />
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{ background: `radial-gradient(ellipse 80% 50% at 50% 20%, ${palette.terracotta} 0%, transparent 60%)` }}
+        />
+      </div>
+
+      <Section
+        id="gallery"
+        className="relative z-10 py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden"
+      >
       {/* Corner floral decoration - aligned with Details section */}
       <div className="absolute inset-0 pointer-events-none z-[1]">
         <NextImage
@@ -153,40 +178,36 @@ export function Gallery() {
         />
       </div>
 
-      {/* Header - match Details typography & decoration */}
+      {/* Header — wedding palette & copy */}
       <div className="relative z-10 text-center mb-12 sm:mb-16 md:mb-20 px-4 sm:px-6">
         <p
           className={`${cormorant.className} text-[0.7rem] sm:text-xs md:text-sm uppercase tracking-[0.28em] mb-2`}
-          style={{ color: GALLERY_TEXT }}
+          style={{ color: palette.medium }}
         >
-          Moments from Our Story
+          Our Story in Frames
         </p>
         <h2
-          className={`${cinzel.className} text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-2 sm:mb-3`}
-          style={{ color: GALLERY_TEXT }}
+          className={`${cinzel.className} text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold mb-2 sm:mb-3`}
+          style={{ color: palette.deep }}
         >
           Gallery
         </h2>
         <p
           className={`${cormorant.className} text-xs sm:text-sm md:text-base font-light max-w-xl mx-auto leading-relaxed px-2 mb-3 sm:mb-4`}
-          style={{ color: GALLERY_TEXT }}
+          style={{ color: palette.medium }}
         >
-          Every captured frame is a piece of our journey, lovingly preserved.
+          A few of our favourite moments together—thank you for being part of our journey.
         </p>
 
-        {/* Decorative element - hero/details style */}
+        {/* Decorative element — sage dividers (hero style) */}
         <div className="flex items-center justify-center gap-2 mt-3 sm:mt-4">
-          <div
-            className="w-8 sm:w-12 md:w-16 h-px bg-gradient-to-r from-transparent to-transparent"
-            style={{ background: `linear-gradient(to right, transparent, ${GALLERY_TEXT}40, transparent)` }}
-          />
-          <div className="w-1.5 h-1.5 rounded-full opacity-80" style={{ backgroundColor: GALLERY_TEXT }} />
-          <div className="w-1.5 h-1.5 rounded-full opacity-50" style={{ backgroundColor: GALLERY_TEXT }} />
-          <div className="w-1.5 h-1.5 rounded-full opacity-80" style={{ backgroundColor: GALLERY_TEXT }} />
-          <div
-            className="w-8 sm:w-12 md:w-16 h-px bg-gradient-to-r from-transparent to-transparent"
-            style={{ background: `linear-gradient(to right, transparent, ${GALLERY_TEXT}40, transparent)` }}
-          />
+          <span className="h-px w-10 sm:w-14 rounded-full" style={{ backgroundColor: palette.sage }} />
+          <div className="flex gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full opacity-80" style={{ backgroundColor: palette.sage }} />
+            <span className="w-1.5 h-1.5 rounded-full opacity-50" style={{ backgroundColor: palette.sage }} />
+            <span className="w-1.5 h-1.5 rounded-full opacity-80" style={{ backgroundColor: palette.sage }} />
+          </div>
+          <span className="h-px w-10 sm:w-14 rounded-full" style={{ backgroundColor: palette.sage }} />
         </div>
       </div>
 
@@ -210,7 +231,8 @@ export function Gallery() {
                       <button
                         key={item.image + index}
                         type="button"
-                        className="group relative snap-center shrink-0 w-[82%] overflow-hidden rounded-lg bg-white/80 backdrop-blur-sm border border-[#9F8650]/30 active:border-[#9F8650]/50 transition-all duration-300"
+                        className="group relative snap-center shrink-0 w-[82%] overflow-hidden rounded-lg bg-white/90 backdrop-blur-sm border transition-all duration-300 active:border-[#8F553D]/60"
+                        style={{ borderColor: `${palette.sage}40` }}
                         onClick={() => {
                           setSelectedImage(item)
                           setCurrentIndex(index)
@@ -218,7 +240,7 @@ export function Gallery() {
                         aria-label={`Open image ${index + 1}`}
                       >
                         {/* Subtle glow on active (mobile) */}
-                        <div className="absolute -inset-0.5 bg-gradient-to-br from-[#9F8650]/20 to-[#800A06]/10 rounded-lg opacity-0 group-active:opacity-100 transition-opacity duration-300 blur-sm" />
+                        <div className="absolute -inset-0.5 rounded-lg opacity-0 group-active:opacity-100 transition-opacity duration-300 blur-sm" style={{ background: `linear-gradient(to bottom right, ${palette.sage}30, ${palette.terracotta}15)` }} />
 
                         <div className="relative aspect-[3/4] overflow-hidden">
                           <img
@@ -232,7 +254,7 @@ export function Gallery() {
                           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-active:opacity-100 transition-opacity duration-300" />
                         </div>
 
-                        <div className="absolute top-2 right-2 bg-[#800A06]/60 backdrop-blur-sm rounded-full px-2 py-1">
+                        <div className="absolute top-2 right-2 backdrop-blur-sm rounded-full px-2 py-1" style={{ backgroundColor: `${palette.deep}99` }}>
                           <span className="text-xs font-medium text-white">
                             {index + 1}/{galleryItems.length}
                           </span>
@@ -241,8 +263,8 @@ export function Gallery() {
                     ))}
                   </div>
 
-                  <p className="mt-2 text-center text-xs font-[family-name:var(--font-crimson)] text-[#800A06]/70 tracking-wide">
-                    Swipe to slide
+                  <p className="mt-2 text-center text-xs font-[family-name:var(--font-crimson)] tracking-wide" style={{ color: palette.medium }}>
+                    Swipe to explore
                   </p>
                 </div>
 
@@ -252,7 +274,8 @@ export function Gallery() {
                     <button
                       key={item.image + index}
                       type="button"
-                      className="group relative w-full overflow-hidden rounded-xl bg-white/80 backdrop-blur-sm border border-[#9F8650]/30 hover:border-[#9F8650]/50 transition-all duration-300"
+                      className="group relative w-full overflow-hidden rounded-xl bg-white/90 backdrop-blur-sm border transition-all duration-300 hover:border-[#8F553D]/50"
+                      style={{ borderColor: `${palette.sage}40` }}
                       onClick={() => {
                         setSelectedImage(item)
                         setCurrentIndex(index)
@@ -260,7 +283,7 @@ export function Gallery() {
                       aria-label={`Open image ${index + 1}`}
                     >
                       {/* Subtle glow on hover */}
-                      <div className="absolute -inset-0.5 bg-gradient-to-br from-[#9F8650]/20 to-[#800A06]/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm" />
+                      <div className="absolute -inset-0.5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm" style={{ background: `linear-gradient(to bottom right, ${palette.sage}25, ${palette.terracotta}12)` }} />
 
                       <div className="relative aspect-[3/4] md:aspect-square overflow-hidden">
                         <img
@@ -276,7 +299,7 @@ export function Gallery() {
                       </div>
 
                       {/* Image counter badge */}
-                      <div className="absolute top-2 right-2 bg-[#800A06]/60 backdrop-blur-sm rounded-full px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute top-2 right-2 backdrop-blur-sm rounded-full px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundColor: `${palette.deep}99` }}>
                         <span className="text-xs font-medium text-white">
                           {index + 1}/{galleryItems.length}
                         </span>
@@ -292,9 +315,25 @@ export function Gallery() {
               <div className="mt-10 sm:mt-12 flex justify-center">
                 <Link
                   href="/gallery"
-                  className="inline-flex items-center justify-center rounded-full px-7 py-3 text-sm sm:text-base font-medium tracking-wide bg-white/80 backdrop-blur-sm border border-[#9F8650]/40 text-[#800A06] shadow-md hover:shadow-lg hover:bg-white/90 hover:border-[#9F8650]/60 transition-all duration-200"
+                  className={`${cinzel.className} inline-flex items-center justify-center rounded-sm px-8 py-3.5 text-[0.65rem] sm:text-xs uppercase tracking-[0.22em] font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F5D8B0] focus-visible:ring-[#45301F]`}
+                  style={{
+                    color: palette.cream,
+                    backgroundColor: palette.terracotta,
+                    border: `2px solid ${palette.terracotta}`,
+                    boxShadow: `0 4px 14px ${palette.deep}20`,
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = palette.deep
+                    e.currentTarget.style.borderColor = palette.deep
+                    e.currentTarget.style.boxShadow = `0 6px 20px ${palette.deep}30`
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = palette.terracotta
+                    e.currentTarget.style.borderColor = palette.terracotta
+                    e.currentTarget.style.boxShadow = `0 4px 14px ${palette.deep}20`
+                  }}
                 >
-                  View more
+                  View full gallery
                 </Link>
               </div>
             )}
@@ -367,8 +406,8 @@ export function Gallery() {
             {/* Top bar with counter and close */}
             <div className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between p-4 sm:p-6">
               {/* Image counter */}
-              <div className="bg-black/40 backdrop-blur-md rounded-full px-4 py-2 border border-[#9F8650]/40">
-                <span className="text-sm sm:text-base font-medium text-[#9F8650]">
+              <div className="backdrop-blur-md rounded-full px-4 py-2 border" style={{ backgroundColor: "rgba(0,0,0,0.4)", borderColor: `${palette.sage}50` }}>
+                <span className="text-sm sm:text-base font-medium" style={{ color: palette.cream }}>
                   {currentIndex + 1} / {galleryItems.length}
                 </span>
               </div>
@@ -458,6 +497,7 @@ export function Gallery() {
           </div>
         </div>
       )}
-    </Section>
+      </Section>
+    </div>
   )
 }

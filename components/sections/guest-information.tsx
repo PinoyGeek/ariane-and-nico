@@ -81,7 +81,6 @@ export function GuestInformation() {
                 </p>
                 <ul className={`${cormorant.className} text-[11px] sm:text-xs md:text-sm lg:text-base italic space-y-1 sm:space-y-1.5 mb-3 sm:mb-5 md:mb-6 leading-snug`} style={{ color: GUEST_DARK }}>
                   <li>Gentlemen: Black Suit and Pants</li>
-                  <li>with Dusty Pink Tie</li>
                   <li>Ladies: Champagne Long Gown</li>
                 </ul>
                 <div className="relative w-full aspect-[4/3] max-w-[260px] sm:max-w-[280px] md:max-w-xs mx-auto md:mx-0 md:mr-auto">

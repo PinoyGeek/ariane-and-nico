@@ -14,7 +14,7 @@ const cormorant = Cormorant_Garamond({
 
 const cinzel = Cinzel({
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["400", "600"],
 })
 
 interface EntourageMember {
@@ -29,10 +29,17 @@ interface PrincipalSponsor {
   FemalePrincipalSponsor: string
 }
 
-// Match hero/details: warm brown accent
-const ENTOURAGE_TEXT = "#9B6A41"
+// Wedding motif — align with hero, gallery, details
+const palette = {
+  deep: "#45301F",
+  medium: "#875F2C",
+  sage: "#A2976A",
+  cream: "#F5D8B0",
+  terracotta: "#8F553D",
+} as const
+
 const DECO_FILTER =
-  "brightness(0) saturate(100%) invert(32%) sepia(55%) saturate(900%) hue-rotate(355deg) brightness(95%) contrast(90%)"
+  "brightness(0) saturate(100%) invert(18%) sepia(35%) saturate(1200%) hue-rotate(15deg) brightness(92%) contrast(88%)"
 
 function mapStaticEntourage(): EntourageMember[] {
   const roleToCategory: Record<string, string> = {
@@ -210,7 +217,7 @@ export function Entourage() {
     return (
       <h3
         className={`relative ${cinzel.className} text-[0.7rem] sm:text-[0.85rem] md:text-base lg:text-lg tracking-[0.18em] uppercase mb-1 sm:mb-1.5 md:mb-2 ${textAlign} ${className} transition-all duration-300 whitespace-nowrap`}
-        style={{ color: ENTOURAGE_TEXT }}
+        style={{ color: palette.deep }}
       >
         {children}
       </h3>
@@ -237,18 +244,18 @@ export function Entourage() {
       >
         <div
           className="absolute inset-0 bg-gradient-to-r from-transparent to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-300 rounded-md"
-          style={{ background: `linear-gradient(to right, transparent, ${ENTOURAGE_TEXT}20, transparent)` }}
+          style={{ background: `linear-gradient(to right, transparent, ${palette.sage}25, transparent)` }}
         />
         <p
           className={`relative text-[11px] sm:text-[13px] md:text-sm lg:text-base font-semibold ${textAlign} transition-all duration-300`}
-          style={{ color: ENTOURAGE_TEXT }}
+          style={{ color: palette.deep }}
         >
           {member.Name}
         </p>
         {showRole && member.RoleTitle && (
           <p
             className={`relative text-[9px] sm:text-[10px] md:text-[10px] lg:text-xs font-medium mt-0 leading-tight ${textAlign} tracking-wide uppercase transition-colors duration-300 opacity-80`}
-            style={{ color: ENTOURAGE_TEXT }}
+            style={{ color: palette.medium }}
           >
             {member.RoleTitle}
           </p>
@@ -300,11 +307,26 @@ export function Entourage() {
   }
 
   return (
-    <section
-      ref={sectionRef}
-      id="entourage"
-      className="relative py-8 md:py-10 lg:py-12 overflow-hidden bg-white"
-    >
+    <div className="relative w-full" style={{ backgroundColor: palette.cream }}>
+      {/* Full-bleed layered background — same as hero, gallery, details */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden>
+        <div
+          className="absolute inset-0 opacity-[0.35]"
+          style={{
+            background: `linear-gradient(165deg, ${palette.cream} 0%, ${palette.sage}18 40%, ${palette.medium}08 70%, ${palette.deep}06 100%)`,
+          }}
+        />
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{ background: `radial-gradient(ellipse 80% 50% at 50% 20%, ${palette.terracotta} 0%, transparent 60%)` }}
+        />
+      </div>
+
+      <section
+        ref={sectionRef}
+        id="entourage"
+        className="relative z-10 py-8 md:py-10 lg:py-12 overflow-hidden"
+      >
       {/* Corner floral decoration - same as hero */}
       <div className="absolute inset-0 pointer-events-none z-[1]">
         <Image
@@ -312,7 +334,7 @@ export function Entourage() {
           alt=""
           width={300}
           height={300}
-          className="absolute top-0 left-0 w-auto h-auto max-w-[140px] sm:max-w-[180px] md:max-w-[220px] opacity-25"
+          className="absolute top-0 left-0 w-auto h-auto max-w-[140px] sm:max-w-[180px] md:max-w-[220px] opacity-20"
           style={{ transform: "scaleY(-1)", filter: DECO_FILTER }}
           priority={false}
         />
@@ -321,7 +343,7 @@ export function Entourage() {
           alt=""
           width={300}
           height={300}
-          className="absolute top-0 right-0 w-auto h-auto max-w-[140px] sm:max-w-[180px] md:max-w-[220px] opacity-25"
+          className="absolute top-0 right-0 w-auto h-auto max-w-[140px] sm:max-w-[180px] md:max-w-[220px] opacity-20"
           style={{ transform: "scaleX(-1) scaleY(-1)", filter: DECO_FILTER }}
           priority={false}
         />
@@ -330,7 +352,7 @@ export function Entourage() {
           alt=""
           width={300}
           height={300}
-          className="absolute bottom-0 left-0 w-auto h-auto max-w-[140px] sm:max-w-[180px] md:max-w-[220px] opacity-25"
+          className="absolute bottom-0 left-0 w-auto h-auto max-w-[140px] sm:max-w-[180px] md:max-w-[220px] opacity-20"
           style={{ filter: DECO_FILTER }}
           priority={false}
         />
@@ -339,7 +361,7 @@ export function Entourage() {
           alt=""
           width={300}
           height={300}
-          className="absolute bottom-0 right-0 w-auto h-auto max-w-[140px] sm:max-w-[180px] md:max-w-[220px] opacity-25"
+          className="absolute bottom-0 right-0 w-auto h-auto max-w-[140px] sm:max-w-[180px] md:max-w-[220px] opacity-20"
           style={{ transform: "scaleX(-1)", filter: DECO_FILTER }}
           priority={false}
         />
@@ -349,21 +371,21 @@ export function Entourage() {
       <div className={`relative z-30 text-center mb-4 sm:mb-5 md:mb-6 px-3 sm:px-4 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"}`}>
         <p
           className={`${cormorant.className} text-[0.7rem] sm:text-xs md:text-sm uppercase tracking-[0.28em] mb-2`}
-          style={{ color: ENTOURAGE_TEXT }}
+          style={{ color: palette.medium }}
         >
           Those who stand with {siteConfig.couple.groomNickname} &amp; {siteConfig.couple.brideNickname}
         </p>
 
         <h2
-          className={`${cinzel.className} text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-1 sm:mb-2 md:mb-2.5`}
-          style={{ color: ENTOURAGE_TEXT }}
+          className={`${cinzel.className} text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold mb-1 sm:mb-2 md:mb-2.5`}
+          style={{ color: palette.deep }}
         >
           Wedding Entourage
         </h2>
 
         <p
           className={`${cormorant.className} text-xs sm:text-sm md:text-base mb-2 sm:mb-2.5 md:mb-3 italic opacity-90`}
-          style={{ color: ENTOURAGE_TEXT }}
+          style={{ color: palette.medium }}
         >
           Honoring those who share in our joy
         </p>
@@ -377,25 +399,25 @@ export function Entourage() {
       >
         <div
           className="relative bg-white/95 backdrop-blur-lg rounded-xl sm:rounded-2xl overflow-hidden border shadow-lg transition-all duration-500 group"
-          style={{ borderColor: `${ENTOURAGE_TEXT}50`, boxShadow: `0 18px 40px ${ENTOURAGE_TEXT}18` }}
+          style={{ borderColor: `${palette.sage}50`, boxShadow: `0 18px 40px ${palette.deep}15` }}
         >
           {/* Card content */}
           <div className="relative p-3 sm:p-4 md:p-5 z-10">
             {isLoading ? (
               <div className="flex items-center justify-center py-24 sm:py-28 md:py-32">
                 <div className="flex flex-col items-center gap-4">
-                  <Loader2 className="h-10 w-10 sm:h-12 sm:w-12 animate-spin opacity-70" style={{ color: ENTOURAGE_TEXT }} />
-                  <span className="font-serif text-base sm:text-lg opacity-80" style={{ color: ENTOURAGE_TEXT }}>Loading entourage...</span>
+                  <Loader2 className="h-10 w-10 sm:h-12 sm:w-12 animate-spin opacity-70" style={{ color: palette.deep }} />
+                  <span className="font-serif text-base sm:text-lg opacity-80" style={{ color: palette.deep }}>Loading entourage...</span>
                 </div>
               </div>
             ) : error ? (
               <div className="flex items-center justify-center py-24 sm:py-28 md:py-32">
                 <div className="text-center">
-                  <p className="font-serif text-base sm:text-lg mb-3" style={{ color: ENTOURAGE_TEXT }}>{error}</p>
+                  <p className="font-serif text-base sm:text-lg mb-3" style={{ color: palette.deep }}>{error}</p>
                   <button
                     onClick={fetchEntourage}
                     className="font-serif underline transition-colors duration-200 opacity-90 hover:opacity-100"
-                    style={{ color: ENTOURAGE_TEXT }}
+                    style={{ color: palette.deep }}
                   >
                     Try again
                   </button>
@@ -403,8 +425,8 @@ export function Entourage() {
               </div>
             ) : entourage.length === 0 ? (
               <div className="text-center py-24 sm:py-28 md:py-32">
-                <Users className="h-14 w-14 sm:h-16 sm:w-16 mx-auto mb-4 opacity-30" style={{ color: ENTOURAGE_TEXT }} />
-                <p className="font-serif text-base sm:text-lg opacity-60" style={{ color: ENTOURAGE_TEXT }}>No entourage members yet</p>
+                <Users className="h-14 w-14 sm:h-16 sm:w-16 mx-auto mb-4 opacity-30" style={{ color: palette.deep }} />
+                <p className="font-serif text-base sm:text-lg opacity-60" style={{ color: palette.deep }}>No entourage members yet</p>
               </div>
             ) : (
             <>
@@ -422,7 +444,7 @@ export function Entourage() {
                     <div key={category}>
                       {categoryIndex > 0 && (
                         <div className="flex justify-center py-2 sm:py-2.5 md:py-3 mb-2 sm:mb-2.5 md:mb-3">
-                          <div className="w-full max-w-md h-px bg-gradient-to-r from-transparent to-transparent" style={{ background: `linear-gradient(to right, transparent, ${ENTOURAGE_TEXT}40, transparent)` }}></div>
+                          <div className="w-full max-w-md h-px bg-gradient-to-r from-transparent to-transparent" style={{ background: `linear-gradient(to right, transparent, ${palette.sage}50, transparent)` }}></div>
                         </div>
                       )}
                       <TwoColumnLayout singleTitle="The Couple" centerContent={true}>
@@ -462,7 +484,7 @@ export function Entourage() {
                       <div key="Parents">
                         {categoryIndex > 0 && (
                           <div className="flex justify-center py-2 sm:py-2.5 md:py-3 mb-2 sm:mb-2.5 md:mb-3">
-                            <div className="w-full max-w-md h-px bg-gradient-to-r from-transparent to-transparent" style={{ background: `linear-gradient(to right, transparent, ${ENTOURAGE_TEXT}40, transparent)` }}></div>
+                            <div className="w-full max-w-md h-px bg-gradient-to-r from-transparent to-transparent" style={{ background: `linear-gradient(to right, transparent, ${palette.sage}50, transparent)` }}></div>
                           </div>
                         )}
                         <TwoColumnLayout leftTitle="Groom’s Parents" rightTitle="Bride’s Parents">
@@ -551,7 +573,7 @@ export function Entourage() {
                       <div key="Family">
                         {categoryIndex > 0 && (
                           <div className="flex justify-center py-2 sm:py-2.5 md:py-3 mb-2 sm:mb-2.5 md:mb-3">
-                            <div className="w-full max-w-md h-px bg-gradient-to-r from-transparent to-transparent" style={{ background: `linear-gradient(to right, transparent, ${ENTOURAGE_TEXT}40, transparent)` }}></div>
+                            <div className="w-full max-w-md h-px bg-gradient-to-r from-transparent to-transparent" style={{ background: `linear-gradient(to right, transparent, ${palette.sage}50, transparent)` }}></div>
                           </div>
                         )}
                         <TwoColumnLayout leftTitle="Family of the Groom" rightTitle="Family of the Bride">
@@ -594,7 +616,7 @@ export function Entourage() {
                       <div key="HonorAttendants">
                         {categoryIndex > 0 && (
                           <div className="flex justify-center py-2 sm:py-2.5 md:py-3 mb-2 sm:mb-2.5 md:mb-3">
-                            <div className="w-full max-w-md h-px bg-gradient-to-r from-transparent to-transparent" style={{ background: `linear-gradient(to right, transparent, ${ENTOURAGE_TEXT}40, transparent)` }}></div>
+                            <div className="w-full max-w-md h-px bg-gradient-to-r from-transparent to-transparent" style={{ background: `linear-gradient(to right, transparent, ${palette.sage}50, transparent)` }}></div>
                           </div>
                         )}
                         <TwoColumnLayout leftTitle="Matron of Honor" rightTitle="Best Man">
@@ -637,7 +659,7 @@ export function Entourage() {
                       <div key="LittleOnes">
                         {categoryIndex > 0 && (
                           <div className="flex justify-center py-2 sm:py-2.5 md:py-3 mb-2 sm:mb-2.5 md:mb-3">
-                            <div className="w-full max-w-md h-px bg-gradient-to-r from-transparent to-transparent" style={{ background: `linear-gradient(to right, transparent, ${ENTOURAGE_TEXT}40, transparent)` }}></div>
+                            <div className="w-full max-w-md h-px bg-gradient-to-r from-transparent to-transparent" style={{ background: `linear-gradient(to right, transparent, ${palette.sage}50, transparent)` }}></div>
                           </div>
                         )}
                         <TwoColumnLayout leftTitle="Little Groom" rightTitle="Little Bride">
@@ -682,7 +704,7 @@ export function Entourage() {
                         <div key="BridalParty">
                           {categoryIndex > 0 && (
                             <div className="flex justify-center py-2 sm:py-2.5 md:py-3 mb-2 sm:mb-2.5 md:mb-3">
-                              <div className="w-full max-w-md h-px bg-gradient-to-r from-transparent to-transparent" style={{ background: `linear-gradient(to right, transparent, ${ENTOURAGE_TEXT}40, transparent)` }}></div>
+                              <div className="w-full max-w-md h-px bg-gradient-to-r from-transparent to-transparent" style={{ background: `linear-gradient(to right, transparent, ${palette.sage}50, transparent)` }}></div>
                             </div>
                           )}
                           <TwoColumnLayout leftTitle="Groomsmen" rightTitle="Bridesmaids">
@@ -720,7 +742,7 @@ export function Entourage() {
                     <div key={category}>
                       {categoryIndex > 0 && (
                         <div className="flex justify-center py-2 sm:py-2.5 md:py-3 mb-2 sm:mb-2.5 md:mb-3">
-                          <div className="w-full max-w-md h-px bg-gradient-to-r from-transparent to-transparent" style={{ background: `linear-gradient(to right, transparent, ${ENTOURAGE_TEXT}40, transparent)` }}></div>
+                          <div className="w-full max-w-md h-px bg-gradient-to-r from-transparent to-transparent" style={{ background: `linear-gradient(to right, transparent, ${palette.sage}50, transparent)` }}></div>
                         </div>
                       )}
                       {/* Secondary Sponsors label */}
@@ -787,7 +809,7 @@ export function Entourage() {
                   <div key={category}>
                     {categoryIndex > 0 && (
                       <div className="flex justify-center py-2 sm:py-2.5 md:py-3 mb-2 sm:mb-2.5 md:mb-3">
-                        <div className="w-full max-w-md h-px bg-gradient-to-r from-transparent to-transparent" style={{ background: `linear-gradient(to right, transparent, ${ENTOURAGE_TEXT}40, transparent)` }}></div>
+                        <div className="w-full max-w-md h-px bg-gradient-to-r from-transparent to-transparent" style={{ background: `linear-gradient(to right, transparent, ${palette.sage}50, transparent)` }}></div>
                       </div>
                     )}
                     <TwoColumnLayout singleTitle={category} centerContent={true}>
@@ -907,6 +929,7 @@ export function Entourage() {
           </div>
         </div>
       </div>
-    </section>
+      </section>
+    </div>
   )
 }

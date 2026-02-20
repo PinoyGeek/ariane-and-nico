@@ -5,10 +5,10 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { siteConfig } from "@/content/site"
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://alvin-and-hannah-invitation.vercel.app/"
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://glenn-and-clarence-invitation.vercel.app/"
 const canonicalUrl = siteUrl.replace(/\/$/, "")
-const desktopHero = "/Details/LinkPreviewnew.jpg"
-const mobileHero = "/Details/LinkPreviewnew.jpg"
+const desktopHero = "/Details/LinkPreviewwnew.jpg"
+const mobileHero = "/Details/LinkPreviewwnew.jpg"
 const eventImageUrl = `${canonicalUrl}${desktopHero}`
 
 const coupleNames = `${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname}`
@@ -19,8 +19,8 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Event",
   name: `${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname} Wedding`,
-  startDate: "2026-03-06T14:00:00+08:00",
-  endDate: "2026-03-06T22:00:00+08:00",
+  startDate: "2026-04-18T14:00:00+08:00",
+  endDate: "2026-04-18T22:00:00+08:00",
   eventStatus: "https://schema.org/EventScheduled",
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
   location: [

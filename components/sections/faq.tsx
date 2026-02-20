@@ -14,16 +14,20 @@ const cormorant = Cormorant_Garamond({
 
 const cinzel = Cinzel({
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["400", "600"],
 })
 
-// FAQ palette — warm brown to match hero/details/guest-info
-const FAQ_ACCENT = "#9B6A41"
-const FAQ_DARK = "#624630"
-const FAQ_DARKER = "#3E2914"
-const FAQ_CREAM = "#F8F4EE"
-const FAQ_CREAM_ALT = "#E8E0D5"
-const DECO_FILTER_WHITE = "brightness(0) saturate(100%) invert(1)"
+// Wedding motif — align with hero, gallery, details
+const palette = {
+  deep: "#45301F",
+  medium: "#875F2C",
+  sage: "#A2976A",
+  cream: "#F5D8B0",
+  terracotta: "#8F553D",
+} as const
+
+const DECO_FILTER =
+  "brightness(0) saturate(100%) invert(18%) sepia(35%) saturate(1200%) hue-rotate(15deg) brightness(92%) contrast(88%)"
 
 interface FAQItem {
   question: string
@@ -106,90 +110,66 @@ export function FAQ() {
   }
 
   return (
-    <Section
-      id="faq"
-      className="relative py-12 md:py-16 lg:py-20 overflow-hidden z-20"
-    >
-      {/* Corner decorations — warm brown tint */}
-      <div className="absolute left-0 top-0 z-0 pointer-events-none">
-        <Image
-          src="/decoration/flower-decoration-left-bottom-corner2.png"
-          alt=""
-          width={300}
-          height={300}
-          className="w-auto h-auto max-w-[140px] sm:max-w-[180px] md:max-w-[220px] opacity-60 scale-y-[-1]"
-          priority={false}
-          style={{ filter: DECO_FILTER_WHITE }}
+    <div className="relative w-full" style={{ backgroundColor: palette.cream }}>
+      {/* Full-bleed layered background — same as hero, gallery, details */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden>
+        <div
+          className="absolute inset-0 opacity-[0.35]"
+          style={{
+            background: `linear-gradient(165deg, ${palette.cream} 0%, ${palette.sage}18 40%, ${palette.medium}08 70%, ${palette.deep}06 100%)`,
+          }}
         />
-      </div>
-      <div className="absolute right-0 top-0 z-0 pointer-events-none">
-        <Image
-          src="/decoration/flower-decoration-left-bottom-corner2.png"
-          alt=""
-          width={300}
-          height={300}
-          className="w-auto h-auto max-w-[140px] sm:max-w-[180px] md:max-w-[220px] opacity-60 scale-x-[-1] scale-y-[-1]"
-          priority={false}
-          style={{ filter: DECO_FILTER_WHITE }}
-        />
-      </div>
-      <div className="absolute left-0 bottom-0 z-0 pointer-events-none">
-        <Image
-          src="/decoration/flower-decoration-left-bottom-corner2.png"
-          alt=""
-          width={300}
-          height={300}
-          className="w-auto h-auto max-w-[140px] sm:max-w-[180px] md:max-w-[220px] opacity-60"
-          priority={false}
-          style={{ filter: DECO_FILTER_WHITE }}
-        />
-      </div>
-      <div className="absolute right-0 bottom-0 z-0 pointer-events-none">
-        <Image
-          src="/decoration/flower-decoration-left-bottom-corner2.png"
-          alt=""
-          width={300}
-          height={300}
-          className="w-auto h-auto max-w-[140px] sm:max-w-[180px] md:max-w-[220px] opacity-60 scale-x-[-1]"
-          priority={false}
-          style={{ filter: DECO_FILTER_WHITE }}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{ background: `radial-gradient(ellipse 80% 50% at 50% 20%, ${palette.terracotta} 0%, transparent 60%)` }}
         />
       </div>
 
-      {/* Section Header — white text */}
+      <Section id="faq" className="relative z-10 py-12 md:py-16 lg:py-20 overflow-hidden">
+      {/* Corner decorations — deep brown tint (hero style) */}
+      <div className="absolute left-0 top-0 z-0 pointer-events-none">
+        <Image src="/decoration/flower-decoration-left-bottom-corner2.png" alt="" width={300} height={300} className="w-auto h-auto max-w-[140px] sm:max-w-[180px] md:max-w-[220px] opacity-20 scale-y-[-1]" priority={false} style={{ filter: DECO_FILTER }} />
+      </div>
+      <div className="absolute right-0 top-0 z-0 pointer-events-none">
+        <Image src="/decoration/flower-decoration-left-bottom-corner2.png" alt="" width={300} height={300} className="w-auto h-auto max-w-[140px] sm:max-w-[180px] md:max-w-[220px] opacity-20 scale-x-[-1] scale-y-[-1]" priority={false} style={{ filter: DECO_FILTER }} />
+      </div>
+      <div className="absolute left-0 bottom-0 z-0 pointer-events-none">
+        <Image src="/decoration/flower-decoration-left-bottom-corner2.png" alt="" width={300} height={300} className="w-auto h-auto max-w-[140px] sm:max-w-[180px] md:max-w-[220px] opacity-20" priority={false} style={{ filter: DECO_FILTER }} />
+      </div>
+      <div className="absolute right-0 bottom-0 z-0 pointer-events-none">
+        <Image src="/decoration/flower-decoration-left-bottom-corner2.png" alt="" width={300} height={300} className="w-auto h-auto max-w-[140px] sm:max-w-[180px] md:max-w-[220px] opacity-20 scale-x-[-1]" priority={false} style={{ filter: DECO_FILTER }} />
+      </div>
+
+      {/* Section Header */}
       <div className="relative z-30 text-center mb-6 sm:mb-9 md:mb-12 px-3 sm:px-4">
-        <p
-          className={`${cormorant.className} text-[0.7rem] sm:text-xs md:text-sm uppercase tracking-[0.28em] mb-2 text-white`}
-        >
+        <p className={`${cormorant.className} text-[0.7rem] sm:text-xs md:text-sm uppercase tracking-[0.28em] mb-2`} style={{ color: palette.medium }}>
           Everything You Need to Know
         </p>
-        <h2
-          className={`${cinzel.className} text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-1.5 sm:mb-3 md:mb-4 text-white`}
-        >
+        <h2 className={`${cinzel.className} text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold mb-1.5 sm:mb-3 md:mb-4`} style={{ color: palette.deep }}>
           Frequently Asked Questions
         </h2>
-        <p
-          className={`${cormorant.className} text-xs sm:text-sm md:text-base font-light max-w-xl mx-auto leading-relaxed px-2 mb-2 sm:mb-3 text-white`}
-        >
+        <p className={`${cormorant.className} text-xs sm:text-sm md:text-base font-light max-w-xl mx-auto leading-relaxed px-2 mb-2 sm:mb-3`} style={{ color: palette.medium }}>
           Common questions answered to help you prepare for our special day
         </p>
         <div className="flex items-center justify-center gap-2 mt-3 sm:mt-4">
-          <div className="w-8 sm:w-12 md:w-16 h-px bg-white/60" />
-          <div className="w-1.5 h-1.5 rounded-full bg-white/80" />
-          <div className="w-1.5 h-1.5 rounded-full bg-white/60" />
-          <div className="w-1.5 h-1.5 rounded-full bg-white/80" />
-          <div className="w-8 sm:w-12 md:w-16 h-px bg-white/60" />
+          <span className="h-px w-10 sm:w-14 rounded-full" style={{ backgroundColor: palette.sage }} />
+          <div className="flex gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full opacity-80" style={{ backgroundColor: palette.sage }} />
+            <span className="w-1.5 h-1.5 rounded-full opacity-50" style={{ backgroundColor: palette.sage }} />
+            <span className="w-1.5 h-1.5 rounded-full opacity-80" style={{ backgroundColor: palette.sage }} />
+          </div>
+          <span className="h-px w-10 sm:w-14 rounded-full" style={{ backgroundColor: palette.sage }} />
         </div>
       </div>
 
-      {/* FAQ content — cream container with warm brown accents */}
+      {/* FAQ content — cream container with motif accents */}
       <div className="relative z-30 max-w-4xl mx-auto px-3 sm:px-5">
         <div
           className="relative backdrop-blur-md rounded-xl sm:rounded-2xl overflow-hidden border shadow-lg"
           style={{
-            backgroundColor: FAQ_CREAM,
-            borderColor: `${FAQ_ACCENT}35`,
-            boxShadow: `0 4px 24px rgba(62,41,20,0.08), 0 0 0 1px ${FAQ_ACCENT}15`,
+            backgroundColor: `${palette.cream}ee`,
+            borderColor: `${palette.sage}50`,
+            boxShadow: `0 4px 24px ${palette.deep}12`,
           }}
         >
           <div className="relative p-2.5 sm:p-4 md:p-5 lg:p-6">
@@ -202,26 +182,26 @@ export function FAQ() {
                     key={index}
                     className="rounded-xl sm:rounded-2xl border overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md"
                     style={{
-                      backgroundColor: "rgba(255,255,255,0.9)",
-                      borderColor: `${FAQ_ACCENT}30`,
+                      backgroundColor: "rgba(255,255,255,0.92)",
+                      borderColor: `${palette.sage}40`,
                     }}
                   >
                     <button
                       onClick={() => toggleItem(index)}
-                      className="group w-full px-2.5 sm:px-3 md:px-4 lg:px-5 py-2 sm:py-2.5 md:py-3 lg:py-4 flex items-center justify-between text-left outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#9B6A4150] transition-colors"
+                      className="group w-full px-2.5 sm:px-3 md:px-4 lg:px-5 py-2 sm:py-2.5 md:py-3 lg:py-4 flex items-center justify-between text-left outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#45301F] transition-colors"
                       aria-expanded={isOpen}
                       aria-controls={contentId}
                     >
                       <span
                         className={`${cinzel.className} font-semibold pr-2 sm:pr-3 md:pr-4 text-xs sm:text-sm md:text-base lg:text-lg leading-snug sm:leading-relaxed transition-colors duration-200`}
-                        style={{ color: isOpen ? FAQ_ACCENT : FAQ_DARK }}
+                        style={{ color: isOpen ? palette.terracotta : palette.deep }}
                       >
                         {item.question}
                       </span>
                       <ChevronDown
                         size={18}
                         className={`flex-shrink-0 transition-transform duration-300 w-4 h-4 sm:w-5 sm:h-5 ${isOpen ? "rotate-180" : ""}`}
-                        style={{ color: FAQ_ACCENT }}
+                        style={{ color: palette.terracotta }}
                         aria-hidden
                       />
                     </button>
@@ -236,15 +216,15 @@ export function FAQ() {
                       <div className="overflow-hidden">
                         <div
                           className="px-2.5 sm:px-3 md:px-4 lg:px-5 py-2 sm:py-2.5 md:py-3 lg:py-4 border-t"
-                          style={{ backgroundColor: FAQ_CREAM_ALT + "99", borderColor: `${FAQ_ACCENT}25` }}
+                          style={{ backgroundColor: `${palette.cream}cc`, borderColor: `${palette.sage}30` }}
                         >
                           {item.answer.includes("[RSVP_LINK]") ? (
-                            <p className={`${cormorant.className} font-medium leading-relaxed sm:leading-loose text-xs sm:text-sm md:text-base lg:text-lg whitespace-pre-line tracking-wide`} style={{ color: FAQ_DARKER }}>
+                            <p className={`${cormorant.className} font-medium leading-relaxed sm:leading-loose text-xs sm:text-sm md:text-base lg:text-lg whitespace-pre-line tracking-wide`} style={{ color: palette.deep }}>
                               {item.answer.split("[RSVP_LINK]")[0]}
                               <a
                                 href="#guest-list"
                                 className="underline font-bold transition-colors hover:opacity-80"
-                                style={{ color: FAQ_ACCENT }}
+                                style={{ color: palette.terracotta }}
                                 onClick={(e) => {
                                   e.preventDefault()
                                   document.getElementById("guest-list")?.scrollIntoView({ behavior: "smooth" })
@@ -256,24 +236,18 @@ export function FAQ() {
                             </p>
                           ) : item.question === "Is there a dress code?" ? (
                             <div className="space-y-3 sm:space-y-4">
-                              <p className={`${cormorant.className} font-medium leading-relaxed sm:leading-loose text-xs sm:text-sm md:text-base lg:text-lg tracking-wide whitespace-pre-line`} style={{ color: FAQ_DARKER }}>
+                              <p className={`${cormorant.className} font-medium leading-relaxed sm:leading-loose text-xs sm:text-sm md:text-base lg:text-lg tracking-wide whitespace-pre-line`} style={{ color: palette.deep }}>
                                 {item.answer}
                               </p>
-                              {/* Warm brown color palette */}
                               <div className="flex items-end justify-center gap-1.5 sm:gap-2 md:gap-3 mt-4 sm:mt-5">
-                                {[
-                                  { color: FAQ_ACCENT, label: "Accent" },
-                                  { color: "#C1AC94", label: "Beige" },
-                                  { color: FAQ_DARK, label: "Brown" },
-                                  { color: FAQ_DARKER, label: "Dark" },
-                                ].map(({ color }) => (
+                                {[palette.terracotta, palette.sage, palette.medium, palette.deep].map((color) => (
                                   <div key={color} className="flex-1 max-w-[40px] sm:max-w-[50px] md:max-w-[60px] lg:max-w-[70px] group">
                                     <div
                                       className="w-full h-16 sm:h-20 md:h-24 lg:h-28 transition-all duration-300 group-hover:scale-105 rounded-b"
                                       style={{
                                         backgroundColor: color,
                                         boxShadow: `0 2px 8px ${color}40`,
-                                        border: `2px solid ${FAQ_ACCENT}25`,
+                                        border: `2px solid ${palette.sage}40`,
                                       }}
                                     />
                                   </div>
@@ -281,7 +255,7 @@ export function FAQ() {
                               </div>
                             </div>
                           ) : (
-                            <p className={`${cormorant.className} font-medium leading-relaxed sm:leading-loose text-xs sm:text-sm md:text-base lg:text-lg whitespace-pre-line tracking-wide`} style={{ color: FAQ_DARKER }}>
+                            <p className={`${cormorant.className} font-medium leading-relaxed sm:leading-loose text-xs sm:text-sm md:text-base lg:text-lg whitespace-pre-line tracking-wide`} style={{ color: palette.deep }}>
                               {item.answer}
                             </p>
                           )}
@@ -295,6 +269,7 @@ export function FAQ() {
           </div>
         </div>
       </div>
-    </Section>
+      </Section>
+    </div>
   )
 }

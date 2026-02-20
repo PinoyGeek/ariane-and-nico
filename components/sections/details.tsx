@@ -24,13 +24,20 @@ const cormorant = Cormorant_Garamond({
 
 const cinzel = Cinzel({
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "600"],
 })
 
-// Match hero page: white background, warm brown accent
-const DETAILS_TEXT = "#9B6A41"
+// Wedding motif — align with hero & gallery
+const palette = {
+  deep: "#45301F",
+  medium: "#875F2C",
+  sage: "#A2976A",
+  cream: "#F5D8B0",
+  terracotta: "#8F553D",
+} as const
+
 const DECO_FILTER =
-  "brightness(0) saturate(100%) invert(32%) sepia(55%) saturate(900%) hue-rotate(355deg) brightness(95%) contrast(90%)"
+  "brightness(0) saturate(100%) invert(18%) sepia(35%) saturate(1200%) hue-rotate(15deg) brightness(92%) contrast(88%)"
 
 export function Details() {
   const [copiedItems, setCopiedItems] = useState<Set<string>>(new Set())
@@ -150,7 +157,22 @@ export function Details() {
   }
 
   return (
-    <Section id="details" className="relative py-12 md:py-16 lg:py-20 overflow-hidden bg-white">
+    <div className="relative w-full" style={{ backgroundColor: palette.cream }}>
+      {/* Full-bleed layered background — same as hero & gallery */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden>
+        <div
+          className="absolute inset-0 opacity-[0.35]"
+          style={{
+            background: `linear-gradient(165deg, ${palette.cream} 0%, ${palette.sage}18 40%, ${palette.medium}08 70%, ${palette.deep}06 100%)`,
+          }}
+        />
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{ background: `radial-gradient(ellipse 80% 50% at 50% 20%, ${palette.terracotta} 0%, transparent 60%)` }}
+        />
+      </div>
+
+      <Section id="details" className="relative z-10 py-12 md:py-16 lg:py-20 overflow-hidden">
       {/* Corner floral decoration - same as hero */}
       <div className="absolute inset-0 pointer-events-none z-[1]">
         <Image
@@ -195,38 +217,34 @@ export function Details() {
       <div className="relative z-30 text-center mb-6 sm:mb-9 md:mb-12 px-3 sm:px-4">
         <p
           className={`${cormorant.className} text-[0.7rem] sm:text-xs md:text-sm uppercase tracking-[0.28em] mb-2`}
-          style={{ color: DETAILS_TEXT }}
+          style={{ color: palette.medium }}
         >
           Ceremony & Reception Details
         </p>
 
         <h2
-          className={`${cinzel.className} text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-1.5 sm:mb-3 md:mb-4`}
-          style={{ color: DETAILS_TEXT }}
+          className={`${cinzel.className} text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold mb-1.5 sm:mb-3 md:mb-4`}
+          style={{ color: palette.deep }}
         >
           Details
         </h2>
 
         <p
           className={`${cormorant.className} text-xs sm:text-sm md:text-base font-light max-w-xl mx-auto leading-relaxed px-2 mb-2 sm:mb-3`}
-          style={{ color: DETAILS_TEXT }}
+          style={{ color: palette.medium }}
         >
           All the important details to help you join us in celebrating our special day
         </p>
 
-        {/* Decorative element - hero style */}
+        {/* Decorative element — sage dividers (hero style) */}
         <div className="flex items-center justify-center gap-2 mt-3 sm:mt-4">
-          <div
-            className="w-8 sm:w-12 md:w-16 h-px bg-gradient-to-r from-transparent to-transparent"
-            style={{ background: `linear-gradient(to right, transparent, ${DETAILS_TEXT}40, transparent)` }}
-          />
-          <div className="w-1.5 h-1.5 rounded-full opacity-80" style={{ backgroundColor: DETAILS_TEXT }} />
-          <div className="w-1.5 h-1.5 rounded-full opacity-50" style={{ backgroundColor: DETAILS_TEXT }} />
-          <div className="w-1.5 h-1.5 rounded-full opacity-80" style={{ backgroundColor: DETAILS_TEXT }} />
-          <div
-            className="w-8 sm:w-12 md:w-16 h-px bg-gradient-to-r from-transparent to-transparent"
-            style={{ background: `linear-gradient(to right, transparent, ${DETAILS_TEXT}40, transparent)` }}
-          />
+          <span className="h-px w-10 sm:w-14 rounded-full" style={{ backgroundColor: palette.sage }} />
+          <div className="flex gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full opacity-80" style={{ backgroundColor: palette.sage }} />
+            <span className="w-1.5 h-1.5 rounded-full opacity-50" style={{ backgroundColor: palette.sage }} />
+            <span className="w-1.5 h-1.5 rounded-full opacity-80" style={{ backgroundColor: palette.sage }} />
+          </div>
+          <span className="h-px w-10 sm:w-14 rounded-full" style={{ backgroundColor: palette.sage }} />
         </div>
       </div>
 
@@ -235,7 +253,7 @@ export function Details() {
         {/* Ceremony Container */}
         <div
           className="overflow-hidden rounded-xl sm:rounded-2xl border bg-white/90 backdrop-blur-2xl shadow-lg transition-transform duration-500 group hover:scale-[1.01]"
-          style={{ borderColor: `${DETAILS_TEXT}50`, boxShadow: `0 18px 48px ${DETAILS_TEXT}20` }}
+          style={{ borderColor: `${palette.sage}50`, boxShadow: `0 18px 48px ${palette.deep}15` }}
         >
           <div className="relative h-64 sm:h-80 md:h-96 w-full">
             <Image
@@ -248,52 +266,52 @@ export function Details() {
             />
             <div
               className="absolute inset-0 bg-gradient-to-t to-transparent"
-              style={{ background: `linear-gradient(to top, ${DETAILS_TEXT}dd 0%, ${DETAILS_TEXT}55 50%, transparent 100%)` }}
+              style={{ background: `linear-gradient(to top, ${palette.deep}dd 0%, ${palette.deep}55 50%, transparent 100%)` }}
             />
             <div className="absolute inset-0 flex flex-col justify-end px-3 sm:px-6 pb-3 sm:pb-6">
               <p className={`${cinzel.className} text-xl sm:text-2xl md:text-3xl font-normal leading-none drop-shadow-md mb-2 text-white`}>
-                Ceremony
+                Ceremony & Reception
               </p>
             </div>
           </div>
 
-          <div className={`${cormorant.className} bg-transparent px-3 sm:px-6 py-4 sm:py-6 space-y-4`} style={{ color: DETAILS_TEXT }}>
-            <div className="text-left pb-3 border-b" style={{ borderColor: `${DETAILS_TEXT}30` }}>
+          <div className={`${cormorant.className} bg-transparent px-3 sm:px-6 py-4 sm:py-6 space-y-4`} style={{ color: palette.deep }}>
+            <div className="text-left pb-3 border-b" style={{ borderColor: `${palette.deep}30` }}>
               <p className="text-[9px] sm:text-[10px] font-semibold tracking-[0.18em] uppercase mb-1 opacity-80">
                 Venue
               </p>
-              <p className={`${cinzel.className} text-base sm:text-lg md:text-xl`} style={{ color: DETAILS_TEXT }}>
+              <p className={`${cinzel.className} text-base sm:text-lg md:text-xl`} style={{ color: palette.deep }}>
                 {ceremonyVenue}
               </p>
-              {/* <p className="text-sm sm:text-base md:text-lg font-medium break-words" style={{ color: DETAILS_TEXT }}>
+              {/* <p className="text-sm sm:text-base md:text-lg font-medium break-words" style={{ color: palette.deep }}>
                 {ceremonyLocationFormatted}
               </p> */}
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2 text-left">
-              <div className="rounded-md border px-2.5 py-2 shadow-sm bg-white/70" style={{ borderColor: `${DETAILS_TEXT}50` }}>
+              <div className="rounded-md border px-2.5 py-2 shadow-sm bg-white/70" style={{ borderColor: `${palette.deep}50` }}>
                 <p className="text-[9px] sm:text-[10px] font-semibold tracking-[0.18em] uppercase mb-0.5 opacity-80">Date</p>
-                <p className="text-sm sm:text-base font-bold" style={{ color: DETAILS_TEXT }}>{formattedCeremonyDate}</p>
+                <p className="text-sm sm:text-base font-bold" style={{ color: palette.deep }}>{formattedCeremonyDate}</p>
               </div>
-              <div className="rounded-md border px-2.5 py-2 shadow-sm bg-white/70" style={{ borderColor: `${DETAILS_TEXT}50` }}>
+              <div className="rounded-md border px-2.5 py-2 shadow-sm bg-white/70" style={{ borderColor: `${palette.deep}50` }}>
                 <p className="text-[9px] sm:text-[10px] font-semibold tracking-[0.18em] uppercase mb-0.5 opacity-80">Time</p>
-                <p className="text-sm sm:text-base font-bold" style={{ color: DETAILS_TEXT }}>{siteConfig.ceremony.time}</p>
+                <p className="text-sm sm:text-base font-bold" style={{ color: palette.deep }}>{siteConfig.ceremony.time}</p>
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-3 pt-2">
               <button
                 onClick={() => openInMaps(ceremonyMapsLink)}
-                className={`${cinzel.className} flex items-center justify-center gap-1.5 rounded-sm py-2.5 sm:py-3 border transition-all text-xs sm:text-sm font-normal hover:-translate-y-0.5`}
-                style={{ backgroundColor: "white", color: DETAILS_TEXT, borderColor: DETAILS_TEXT }}
+                className={`${cinzel.className} flex items-center justify-center gap-1.5 rounded-sm py-2.5 sm:py-3 border-2 transition-all text-xs sm:text-sm font-medium hover:opacity-90 hover:-translate-y-0.5`}
+                style={{ backgroundColor: palette.terracotta, color: palette.cream, borderColor: palette.terracotta }}
               >
                 <Navigation className="w-4 h-4" />
                 Get Directions
               </button>
               <button
                 onClick={() => copyToClipboard(ceremonyLocation, "ceremony")}
-                className={`${cinzel.className} flex items-center justify-center gap-1.5 rounded-sm border py-2.5 sm:py-3 hover:bg-white/70 transition-all text-xs sm:text-sm font-normal bg-white/50`}
-                style={{ borderColor: `${DETAILS_TEXT}50`, color: DETAILS_TEXT }}
+                className={`${cinzel.className} flex items-center justify-center gap-1.5 rounded-sm border-2 py-2.5 sm:py-3 hover:bg-white/70 transition-all text-xs sm:text-sm font-normal bg-white/50`}
+                style={{ borderColor: `${palette.sage}60`, color: palette.deep }}
               >
                 {copiedItems.has("ceremony") ? (
                   <>
@@ -312,88 +330,14 @@ export function Details() {
         </div>
 
         {/* Reception Container */}
-        <div
-          className="overflow-hidden rounded-xl sm:rounded-2xl border bg-white/90 backdrop-blur-2xl shadow-lg transition-transform duration-500 group hover:scale-[1.01]"
-          style={{ borderColor: `${DETAILS_TEXT}50`, boxShadow: `0 18px 48px ${DETAILS_TEXT}20` }}
-        >
-          <div className="relative h-64 sm:h-80 md:h-96 w-full">
-            <Image
-              src="/Details/Ardesia Resort And Spa Angeles Pampanga.jpg"
-              alt={receptionLocationFormatted}
-              fill
-              className="object-cover"
-              sizes="100vw"
-              priority={false}
-            />
-            <div
-              className="absolute inset-0 bg-gradient-to-t to-transparent"
-              style={{ background: `linear-gradient(to top, ${DETAILS_TEXT}dd 0%, ${DETAILS_TEXT}55 50%, transparent 100%)` }}
-            />
-            <div className="absolute inset-0 flex flex-col justify-end px-3 sm:px-6 pb-3 sm:pb-6">
-              <p className={`${cinzel.className} text-xl sm:text-2xl md:text-3xl font-normal leading-none drop-shadow-md mb-2 text-white`}>
-                Reception
-              </p>
-            </div>
-          </div>
-
-          <div className={`${cormorant.className} bg-transparent px-3 sm:px-6 py-4 sm:py-6 space-y-4`} style={{ color: DETAILS_TEXT }}>
-            <div className="text-left pb-3 border-b" style={{ borderColor: `${DETAILS_TEXT}30` }}>
-              <p className="text-[9px] sm:text-[10px] font-semibold tracking-[0.18em] uppercase mb-1 opacity-80">Venue</p>
-              <p className={`${cinzel.className} text-base sm:text-lg md:text-xl`} style={{ color: DETAILS_TEXT }}>
-                {receptionVenue}
-              </p>
-              {/* <p className="text-sm sm:text-base md:text-lg font-medium break-words" style={{ color: DETAILS_TEXT }}>
-                {receptionLocationFormatted}
-              </p> */}
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2 text-left">
-              <div className="rounded-md border px-2.5 py-2 shadow-sm bg-white/70" style={{ borderColor: `${DETAILS_TEXT}50` }}>
-                <p className="text-[9px] sm:text-[10px] font-semibold tracking-[0.18em] uppercase mb-0.5 opacity-80">Date</p>
-                <p className="text-sm sm:text-base font-bold" style={{ color: DETAILS_TEXT }}>{formattedReceptionDate}</p>
-              </div>
-              <div className="rounded-md border px-2.5 py-2 shadow-sm bg-white/70" style={{ borderColor: `${DETAILS_TEXT}50` }}>
-                <p className="text-[9px] sm:text-[10px] font-semibold tracking-[0.18em] uppercase mb-0.5 opacity-80">Time</p>
-                <p className="text-sm sm:text-base font-bold" style={{ color: DETAILS_TEXT }}>{siteConfig.reception.time}</p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-3 pt-2">
-              <button
-                onClick={() => openInMaps(receptionMapsLink)}
-                className={`${cinzel.className} flex items-center justify-center gap-1.5 rounded-sm py-2.5 sm:py-3 border transition-all text-xs sm:text-sm font-normal hover:-translate-y-0.5`}
-                style={{ backgroundColor: "white", color: DETAILS_TEXT, borderColor: DETAILS_TEXT }}
-              >
-                <Navigation className="w-4 h-4" />
-                Get Directions
-              </button>
-              <button
-                onClick={() => copyToClipboard(receptionLocation, "reception")}
-                className={`${cinzel.className} flex items-center justify-center gap-1.5 rounded-sm border py-2.5 sm:py-3 hover:bg-white/70 transition-all text-xs sm:text-sm font-normal bg-white/50`}
-                style={{ borderColor: `${DETAILS_TEXT}50`, color: DETAILS_TEXT }}
-              >
-                {copiedItems.has("reception") ? (
-                  <>
-                    <Check className="w-4 h-4" />
-                    Copied
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-4 h-4" />
-                    Copy Address
-                  </>
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
+    
       </div>
 
       {/* Gentle Reminders Container */}
       <div className="relative z-10 max-w-4xl mx-auto px-3 sm:px-5 mt-8 sm:mt-12 md:mt-16">
         <div
           className="relative overflow-hidden rounded-xl sm:rounded-2xl border bg-white/90 backdrop-blur-2xl shadow-lg"
-          style={{ borderColor: `${DETAILS_TEXT}50`, boxShadow: `0 18px 48px ${DETAILS_TEXT}20` }}
+          style={{ borderColor: `${palette.sage}50`, boxShadow: `0 18px 48px ${palette.deep}15` }}
         >
           <div className="relative z-10 px-4 sm:px-6 md:px-8 py-6 sm:py-8 md:py-10">
             {/* <div className="flex justify-center gap-2 sm:gap-3 md:gap-4 mb-6 sm:mb-8">
@@ -411,7 +355,7 @@ export function Details() {
                     }`}
                     style={{
                       transform: `rotate(${currentRotation}deg) ${isActive ? "scale(1.1)" : "scale(1)"}`,
-                      borderColor: `${DETAILS_TEXT}40`,
+                      borderColor: `${palette.deep}40`,
                     }}
                   >
                     <Image
@@ -428,45 +372,45 @@ export function Details() {
 
             <h3
               className={`${cinzel.className} text-2xl sm:text-3xl md:text-4xl text-center mb-6 sm:mb-8 font-normal tracking-wide`}
-              style={{ color: DETAILS_TEXT }}
+              style={{ color: palette.deep }}
             >
               GENTLE REMINDERS
             </h3>
 
             <div className="space-y-4 sm:space-y-5 md:space-y-6 max-w-2xl mx-auto">
-              <div className="bg-white/70 rounded-lg p-4 sm:p-5 md:p-6 border shadow-sm" style={{ borderColor: `${DETAILS_TEXT}50` }}>
-                <h4 className={`${cinzel.className} text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-3`} style={{ color: DETAILS_TEXT }}>
+              <div className="bg-white/70 rounded-lg p-4 sm:p-5 md:p-6 border shadow-sm" style={{ borderColor: `${palette.deep}50` }}>
+                <h4 className={`${cinzel.className} text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-3`} style={{ color: palette.deep }}>
                   CHILDREN
                 </h4>
-                <p className={`${cormorant.className} text-sm sm:text-base md:text-lg leading-relaxed`} style={{ color: DETAILS_TEXT }}>
+                <p className={`${cormorant.className} text-sm sm:text-base md:text-lg leading-relaxed`} style={{ color: palette.deep }}>
                   To allow all of our guests to celebrate without distraction, we respectfully request that the wedding reception be an adults-only event. Thank you for your understanding.
                 </p>
               </div>
 
-              <div className="bg-white/70 rounded-lg p-4 sm:p-5 md:p-6 border shadow-sm" style={{ borderColor: `${DETAILS_TEXT}50` }}>
-                <h4 className={`${cinzel.className} text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-3`} style={{ color: DETAILS_TEXT }}>
+              <div className="bg-white/70 rounded-lg p-4 sm:p-5 md:p-6 border shadow-sm" style={{ borderColor: `${palette.deep}50` }}>
+                <h4 className={`${cinzel.className} text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-3`} style={{ color: palette.deep }}>
                   UNPLUGGED CEREMONY
                 </h4>
-                <p className={`${cormorant.className} text-sm sm:text-base md:text-lg leading-relaxed`} style={{ color: DETAILS_TEXT }}>
+                <p className={`${cormorant.className} text-sm sm:text-base md:text-lg leading-relaxed`} style={{ color: palette.deep }}>
                   We are having an unplugged ceremony, meaning we kindly ask all guests to put away their phones and cameras. We want everyone to be fully in the moment with us. Don&apos;t worry—our professional photographer will capture all the special moments, and we&apos;ll be happy to share them with you later!
                 </p>
               </div>
 
-              <div className="bg-white/70 rounded-lg p-4 sm:p-5 md:p-6 border shadow-sm" style={{ borderColor: `${DETAILS_TEXT}50` }}>
-                <h4 className={`${cinzel.className} text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-3`} style={{ color: DETAILS_TEXT }}>
+              <div className="bg-white/70 rounded-lg p-4 sm:p-5 md:p-6 border shadow-sm" style={{ borderColor: `${palette.deep}50` }}>
+                <h4 className={`${cinzel.className} text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-3`} style={{ color: palette.deep }}>
                   ARRIVAL
                 </h4>
-                <p className={`${cormorant.className} text-sm sm:text-base md:text-lg leading-relaxed`} style={{ color: DETAILS_TEXT }}>
+                <p className={`${cormorant.className} text-sm sm:text-base md:text-lg leading-relaxed`} style={{ color: palette.deep }}>
                   We kindly request guests to arrive by <span className="font-semibold">1:30 PM</span> to allow ample time to settle in before the ceremony, which will begin promptly at <span className="font-semibold">2:30 PM</span>.{" "}
                   The reception will follow at <span className="font-semibold">5:00 PM</span>.
                 </p>
               </div>
 
-              <div className="bg-white/70 rounded-lg p-4 sm:p-5 md:p-6 border shadow-sm" style={{ borderColor: `${DETAILS_TEXT}50` }}>
-                <h4 className={`${cinzel.className} text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-3`} style={{ color: DETAILS_TEXT }}>
+              <div className="bg-white/70 rounded-lg p-4 sm:p-5 md:p-6 border shadow-sm" style={{ borderColor: `${palette.deep}50` }}>
+                <h4 className={`${cinzel.className} text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-3`} style={{ color: palette.deep }}>
                   GIFTS
                 </h4>
-                <p className={`${cormorant.className} text-sm sm:text-base md:text-lg leading-relaxed`} style={{ color: DETAILS_TEXT }}>
+                <p className={`${cormorant.className} text-sm sm:text-base md:text-lg leading-relaxed`} style={{ color: palette.deep }}>
                   Your presence is already the greatest gift, but if you&apos;d like to give something, cash gifts are preferred. This will help us start our new journey together in the most meaningful way.
                 </p>
               </div>
@@ -480,34 +424,34 @@ export function Details() {
         <div
           className="fixed inset-0 backdrop-blur-xl z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 animate-in fade-in duration-500"
           onClick={() => setShowImageModal(null)}
-          style={{ backgroundColor: "rgba(155, 106, 65, 0.96)" }}
+          style={{ backgroundColor: `${palette.deep}F5` }}
         >
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div
               className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl animate-pulse opacity-20"
-              style={{ backgroundColor: "#F5F5DC" }}
+              style={{ backgroundColor: palette.cream }}
             />
             <div
               className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl animate-pulse opacity-20"
-              style={{ backgroundColor: "#F5F5DC", animationDelay: "1s" }}
+              style={{ backgroundColor: palette.cream, animationDelay: "1s" }}
             />
           </div>
 
           <div
             className="relative max-w-6xl w-full max-h-[95vh] sm:max-h-[90vh] rounded-3xl overflow-hidden shadow-2xl border-2 animate-in zoom-in-95 duration-500 group bg-white"
             onClick={(e) => e.stopPropagation()}
-            style={{ borderColor: DETAILS_TEXT }}
+            style={{ borderColor: palette.deep }}
           >
             <div
               className="absolute top-0 left-0 right-0 h-1"
-              style={{ background: `linear-gradient(to right, ${DETAILS_TEXT}, #F5F5DC, ${DETAILS_TEXT})` }}
+              style={{ background: `linear-gradient(to right, ${palette.deep}, ${palette.cream}, ${palette.deep})` }}
             />
 
             <button
               onClick={() => setShowImageModal(null)}
               className="absolute top-4 right-4 sm:top-5 sm:right-5 md:top-6 md:right-6 z-20 p-2.5 sm:p-3 rounded-xl shadow-xl transition-all duration-300 hover:scale-110 hover:shadow-2xl active:scale-95 border-2"
               title="Close (ESC)"
-              style={{ backgroundColor: "white", borderColor: DETAILS_TEXT, color: DETAILS_TEXT }}
+              style={{ backgroundColor: "white", borderColor: palette.deep, color: palette.deep }}
             >
               <X className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
             </button>
@@ -515,16 +459,16 @@ export function Details() {
             <div className="absolute top-4 left-4 sm:top-5 sm:left-5 md:top-6 md:left-6 z-20">
               <div
                 className="flex items-center gap-2 backdrop-blur-md px-4 py-2 rounded-full shadow-xl border-2 bg-white"
-                style={{ borderColor: DETAILS_TEXT, color: DETAILS_TEXT }}
+                style={{ borderColor: palette.deep, color: palette.deep }}
               >
                 {showImageModal === "ceremony" ? (
                   <>
-                    <Heart className="w-4 h-4" fill={DETAILS_TEXT} style={{ color: DETAILS_TEXT }} />
+                    <Heart className="w-4 h-4" fill={palette.deep} style={{ color: palette.deep }} />
                     <span className="text-xs sm:text-sm font-bold">Ceremony Venue</span>
                   </>
                 ) : (
                   <>
-                    <Utensils className="w-4 h-4" style={{ color: DETAILS_TEXT }} />
+                    <Utensils className="w-4 h-4" style={{ color: palette.deep }} />
                     <span className="text-xs sm:text-sm font-bold">Reception Venue</span>
                   </>
                 )}
@@ -544,11 +488,11 @@ export function Details() {
 
             <div
               className={`${cormorant.className} p-5 sm:p-6 md:p-8 bg-white backdrop-blur-sm border-t-2 relative`}
-              style={{ borderColor: `${DETAILS_TEXT}40` }}
+              style={{ borderColor: `${palette.deep}40` }}
             >
               <div
                 className="absolute top-0 left-8 right-8 h-px opacity-30"
-                style={{ background: `linear-gradient(to right, transparent, ${DETAILS_TEXT}, transparent)` }}
+                style={{ background: `linear-gradient(to right, transparent, ${palette.deep}, transparent)` }}
               />
 
               <div className="space-y-5">
@@ -556,16 +500,16 @@ export function Details() {
                   <div className="space-y-2">
                     <h3
                       className={`${cinzel.className} text-xl sm:text-2xl md:text-3xl font-bold flex items-center gap-3`}
-                      style={{ color: DETAILS_TEXT }}
+                      style={{ color: palette.deep }}
                     >
                       {showImageModal === "ceremony" ? (
-                        <Heart className="w-6 h-6" fill={DETAILS_TEXT} style={{ color: DETAILS_TEXT }} />
+                        <Heart className="w-6 h-6" fill={palette.deep} style={{ color: palette.deep }} />
                       ) : (
-                        <Utensils className="w-6 h-6" style={{ color: DETAILS_TEXT }} />
+                        <Utensils className="w-6 h-6" style={{ color: palette.deep }} />
                       )}
                       {showImageModal === "ceremony" ? siteConfig.ceremony.venue : siteConfig.reception.venue}
                     </h3>
-                    <div className="flex items-center gap-2 text-sm opacity-80" style={{ color: DETAILS_TEXT }}>
+                    <div className="flex items-center gap-2 text-sm opacity-80" style={{ color: palette.deep }}>
                       <MapPin className="w-4 h-4" />
                       <span>
                         {showImageModal === "ceremony"
@@ -577,7 +521,7 @@ export function Details() {
                     {showImageModal === "ceremony" && (
                       <div
                         className="flex items-center gap-2 text-sm font-medium px-3 py-2 rounded-lg border w-fit"
-                        style={{ borderColor: `${DETAILS_TEXT}50`, color: DETAILS_TEXT }}
+                        style={{ borderColor: `${palette.deep}50`, color: palette.deep }}
                       >
                         <Clock className="w-4 h-4" />
                         <span>
@@ -588,7 +532,7 @@ export function Details() {
                     {showImageModal === "reception" && (
                       <div
                         className="flex items-center gap-2 text-sm font-medium px-3 py-2 rounded-lg border w-fit"
-                        style={{ borderColor: `${DETAILS_TEXT}50`, color: DETAILS_TEXT }}
+                        style={{ borderColor: `${palette.deep}50`, color: palette.deep }}
                       >
                         <Clock className="w-4 h-4" />
                         <span>
@@ -608,7 +552,7 @@ export function Details() {
                       }
                       className="flex items-center justify-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 border-2 rounded-xl font-semibold text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95 shadow-md whitespace-nowrap"
                       title="Copy address"
-                      style={{ borderColor: DETAILS_TEXT, color: DETAILS_TEXT, backgroundColor: "white" }}
+                      style={{ borderColor: palette.deep, color: palette.deep, backgroundColor: "white" }}
                     >
                       {copiedItems.has(`modal-${showImageModal}`) ? (
                         <>
@@ -628,7 +572,7 @@ export function Details() {
                         openInMaps(showImageModal === "ceremony" ? ceremonyMapsLink : receptionMapsLink)
                       }
                       className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 shadow-lg whitespace-nowrap text-white"
-                      style={{ backgroundColor: DETAILS_TEXT }}
+                      style={{ backgroundColor: palette.terracotta, color: palette.cream }}
                     >
                       <Navigation className="w-4 h-4 sm:w-5 sm:h-5" />
                       <span>Get Directions</span>
@@ -636,7 +580,7 @@ export function Details() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 text-xs opacity-70" style={{ color: DETAILS_TEXT }}>
+                <div className="flex items-center gap-2 text-xs opacity-70" style={{ color: palette.deep }}>
                   <span className="flex items-center gap-1.5">
                     <Camera className="w-3 h-3" />
                     Click outside to close
@@ -649,6 +593,7 @@ export function Details() {
           </div>
         </div>
       )}
-    </Section>
+      </Section>
+    </div>
   )
 }

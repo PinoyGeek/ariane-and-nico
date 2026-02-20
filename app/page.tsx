@@ -78,7 +78,7 @@ export default function Home() {
 
               {/* <PrincipalSponsors /> */}
               <GuestList />
-              {/* <BookOfGuests /> */}
+              <BookOfGuests />
               <FAQ />
               <Registry />
               <SnapShare />

@@ -10,12 +10,12 @@ interface LoadingScreenProps {
 
 // Countdown boxes with color photos - numbers show days, hours, minutes
 const COUNTDOWN_BOXES = [
-  { src: '/gallery/couple (1).jpg' },
-  { src: '/gallery/couple (2).jpg' },
-  { src: '/gallery/couple (3).jpg' },
+  { src: '/mobile-background/couple (6).webp' },
+  { src: '/mobile-background/couple (10).webp' },
+  { src: '/mobile-background/couple (3).webp' },
 ];
 
-const MAIN_BW_IMAGE = '/mobile-background/couple (1).webp';
+const MAIN_BW_IMAGE = '/mobile-background/couple (15).webp';
 const STAGGER_DELAY_MS = 4000; // Each image appears every 4 seconds
 const BOX_TRANSITION_MS = 1200; // Slow, smooth transition
 const TOTAL_DURATION_MS = COUNTDOWN_BOXES.length * STAGGER_DELAY_MS + 3000;
@@ -28,7 +28,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
 
   // Live countdown: days, hours, minutes until wedding
   const countdown = useMemo(() => {
-    const wedding = new Date('2026-03-26T13:30:00');
+    const wedding = new Date('2026-04-18T13:30:00');
     const diff = wedding.getTime() - now.getTime();
     if (diff <= 0) return { days: 0, hours: 0, minutes: 0 };
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -49,8 +49,8 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
     return `${days} DAYS TO GO`;
   }, [countdown.days]);
 
-  // Wedding date: 03.26.26 (month, day, year)
-  const countdownNumbers = ['03', '26', '26'];
+  // Wedding date: 04.18.26 (month, day, year)
+  const countdownNumbers = ['04', '18', '26'];
   const countdownLabels = ['MONTH', 'DAY', 'YEAR'];
 
   useEffect(() => {
@@ -89,7 +89,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
   }, [onComplete]);
 
   const coupleNames = `${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname}`;
-  const hashtag = 'ToInffyNitty&Beyond';
+  const hashtag = '#GLENNsHeartForCLARENCE';
   const productionCredit = '';
 
   // Palette tuned to requested hues
