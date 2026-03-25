@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import { Section } from "@/components/section"
-import { Cinzel, Cormorant_Garamond, Montserrat } from "next/font/google"
+import { Cinzel } from "next/font/google"
 import { siteConfig } from "@/content/site"
 
 const cinzel = Cinzel({
@@ -12,14 +12,25 @@ const cinzel = Cinzel({
 })
 
 const GCASH_QR = [
-  { id: "gcash1", src: "/QR/gcash.png", label: "GCash 1" },
-  { id: "gcash2", src: "/QR/gcash2.png", label: "GCash 2" },
+  {
+    id: "MariBank",
+    src: "/QR/gcash.png",
+    label: "MariBank",
+    accountNumber: "MARIBANK: (****2960) Ltryl Benitez",
+  },
+  {
+    id: "gcash",
+    src: "/QR/gcash2.png",
+    label: "GCash",
+    accountNumber: "GCash: LT**L B.",
+  },
 ] as const
 
-// Colors sourced from globals.css @theme inline — edit there to update everywhere
+type ActiveQrId = (typeof GCASH_QR)[number]["id"]
 
 export function Registry() {
-  const [activeQr, setActiveQr] = useState<"gcash1" | "gcash2">("gcash1")
+  const [activeQr, setActiveQr] = useState<ActiveQrId>("MariBank")
+  const activeItem = GCASH_QR.find((i) => i.id === activeQr) ?? GCASH_QR[0]
 
   return (
     <Section
@@ -40,11 +51,7 @@ export function Registry() {
         </h2>
         
         <p className="text-xs sm:text-sm md:text-base lg:text-lg text-motif-cream/90 font-light max-w-2xl mx-auto leading-relaxed px-2">
-        Your presence on our special day is already the greatest gift we could ask for, and celebrating this moment with you means so much to us.
-
-If you wish to bless us further as we begin our journey as husband and wife, you may scan any of the codes below to share your love and support. 
-
-We truly appreciate and thank you for the love and generosity. This means so much as we step into this new chapter of our lives. 
+        With hearts full of gratitude, we ask only for your presence and prayers as we celebrate together. Should you wish to bless us further, a gift toward our future would be a blessing we will always treasure. 
 
         </p>
         
@@ -80,14 +87,24 @@ We truly appreciate and thank you for the love and generosity. This means so muc
             ))}
           </div>
           {/* Active QR image */}
-          <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-xl overflow-hidden bg-white shadow-lg">
+          <div className="flex flex-col items-center">
+            <div className="relative w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 rounded-xl overflow-hidden bg-white shadow-lg">
             <Image
-              src={activeQr === "gcash1" ?  GCASH_QR[0].src : GCASH_QR[1].src}
-              alt={`GCash QR code - ${activeQr === "gcash1" ? GCASH_QR[0].label : GCASH_QR[1].label}`}
+              src={activeItem.src}
+              alt={`QR code - ${activeItem.label}`}
               fill
               className="object-contain p-2"
-              sizes="(max-width: 640px) 192px, (max-width: 768px) 224px, 256px"
+              sizes="(max-width: 640px) 208px, (max-width: 768px) 240px, 288px"
             />
+          </div>
+            <div className="mt-3 sm:mt-4 w-full max-w-md text-center">
+              <p className="text-[11px] sm:text-xs tracking-[0.18em] uppercase text-motif-cream/70">
+                Account Number
+              </p>
+              <p className={`${cinzel.className} mt-1 text-sm sm:text-base text-motif-cream drop-shadow-sm`}>
+                {activeItem.accountNumber}
+              </p>
+            </div>
           </div>
         </div>
       </div>

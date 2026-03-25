@@ -26,7 +26,7 @@ interface HeroProps {
 
 
 const desktopImages: string[] = [
-  '/slide/desktop/couple (1).jpg',
+  '/slide/mobile/couple (1).jpg',
   '/slide/desktop/couple (2).jpg',
   '/slide/desktop/couple (3).jpg',
   '/slide/desktop/couple (4).jpg',
@@ -34,11 +34,11 @@ const desktopImages: string[] = [
 ];
 
 const mobileImages: string[] = [
-  '/slide/mobile/couple (21).jpg',
-  '/slide/mobile/couple (11).jpg',
-  '/slide/mobile/couple (16).jpg',
-  '/slide/mobile/couple (21).jpg',
-  '/slide/mobile/couple (14).jpg'
+  '/slide/mobile/couple (1).jpg',
+  '/slide/mobile/couple (2).jpg',
+  '/slide/mobile/couple (3).jpg',
+  '/slide/mobile/couple (4).jpg',
+  '/slide/mobile/couple (5).jpg'
 ];
 
 export const Hero: React.FC<HeroProps> = ({ onOpen, visible }) => {

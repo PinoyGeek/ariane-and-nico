@@ -35,7 +35,7 @@ export function LoveStory() {
         layout="image-left"
         isFirst={true}
         title="First Met (2014)"
-        imageSrc="/LoveStory/img1.png"
+        imageSrc="/slide/lovestory.png"
         text={
           <>
             <p className="mb-4">

@@ -1,5 +1,6 @@
 import fs from "fs/promises"
 import path from "path"
+import sharp from "sharp"
 import Image from "next/image"
 import MasonryGallery from "@/components/masonry-gallery"
 import { siteConfig } from "@/content/site"
@@ -42,14 +43,33 @@ async function getImagesFrom(dir: string) {
   }
 }
 
+async function getImageMetadata(src: string) {
+  const relativeSrc = src.startsWith("/") ? src.slice(1) : src
+  const absolutePath = path.join(process.cwd(), "public", relativeSrc)
+
+  try {
+    const metadata = await sharp(absolutePath).metadata()
+    const width = metadata.width ?? 1200
+    const height = metadata.height ?? 1500
+    const orientation =
+      width > height ? ("landscape" as const) : ("portrait" as const)
+
+    return { width, height, orientation }
+  } catch {
+    return { width: 1200, height: 1500, orientation: "portrait" as const }
+  }
+}
+
 export default async function GalleryPage() {
   const mobileImages = await getImagesFrom("mobile-background")
   const desktopImages = await getImagesFrom("desktop-background")
   const allImages = [...mobileImages, ...desktopImages]
-  const images = allImages.map((src) => {
+  const images = await Promise.all(allImages.map(async (src) => {
     const category = src.includes("mobile-background") ? "mobile" as const : "desktop" as const
-    return { src, category }
-  })
+    const { width, height, orientation } = await getImageMetadata(src)
+
+    return { src, category, width, height, orientation }
+  }))
 
   return (
     <main className="min-h-screen relative overflow-hidden bg-motif-cream">

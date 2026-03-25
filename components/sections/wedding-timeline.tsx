@@ -4,7 +4,7 @@ import type React from "react"
 import Image from "next/image"
 import { Section } from "@/components/section"
 import { siteConfig } from "@/content/site"
-import { Clock, MapPin } from "lucide-react"
+import { MapPin } from "lucide-react"
 import { motion } from "motion/react"
 import { Cormorant_Garamond, Cinzel } from "next/font/google"
 
@@ -23,14 +23,12 @@ const ceremonyTime = siteConfig.ceremony.time
 const guestsTime = siteConfig.ceremony.guestsTime ?? "1:30 PM"
 const ceremonyVenue = siteConfig.ceremony.venue
 const receptionVenue = siteConfig.reception.venue
-const receptionTime = siteConfig.reception.time
 
 // Colors sourced from globals.css @theme inline — edit there to update everywhere
-const TIMELINE_TEXT = "var(--color-motif-deep)"
-// SVG stroke — CSS vars are not valid SVG attributes; value matches --color-motif-deep in globals.css
-const TIMELINE_SVG_STROKE = "#5B6655"
-const DECO_FILTER =
-  "brightness(0) saturate(100%) invert(39%) sepia(18%) saturate(486%) hue-rotate(62deg) brightness(94%) contrast(88%)"
+// This section sits on a darker background, so render timeline text/icons in white.
+const TIMELINE_TEXT = "var(--color-motif-cream)"
+// SVG stroke — CSS vars are not valid SVG attributes
+const TIMELINE_SVG_STROKE = "#FFFFFF"
 // White tint for corner florals — section sits on dark background
 const DECO_FILTER_WHITE = "brightness(0) saturate(100%) invert(1)"
 
@@ -48,49 +46,57 @@ interface TimelineEvent {
 
 const timelineEvents: TimelineEvent[] = [
   {
-    time: guestsTime,
+    time: "2:30PM",
     title: "Arrival",
-    description: "Please arrive on time to find your seat, settle in, and get ready for the celebration.",
+    // description: "Please arrive on time to find your seat, settle in, and get ready for the celebration.",
     location: ceremonyVenue,
     icon: GuestsIcon,
     imageSrc: "/weddingtimeline/arrivalimage.png",
   },
   {
-    time: ceremonyTime,
+    time: "3:00 PM",
     title: "Wedding Ceremony",
-    description: `Join us as ${groomNickname} & ${brideNickname} exchange vows and begin their life together.`,
+    // description: `Join us as ${groomNickname} & ${brideNickname} exchange vows and begin their life together.`,
     location: ceremonyVenue,
     icon: RingsIcon,
     imageSrc: "/weddingtimeline/WeddingCeremony.png",
   },
   {
-    time: "3:00 PM",
+    time: "4:00 PM",
+    title: "Photos",
+    // description: "We are having an unplugged ceremony, meaning we kindly ask all guests to put away their phones and cameras. We want everyone to be fully in the moment with us. Don't worry—our professional photographer will capture all the special moments, and we'll be happy to share them with you later!",
+    location: ceremonyVenue,
+    icon: RingsIcon,
+    imageSrc: "/weddingtimeline/PhotoSession.png",
+  },
+  {
+    time: "5:00 PM",
     title: "Cocktail Hour",
-    description: "Enjoy drinks and light bites as we transition into the reception and mingle with guests.",
+    // description: "Enjoy drinks and light bites as we transition into the reception and mingle with guests.",
     location: receptionVenue,
     icon: CocktailIcon,
     imageSrc: "/weddingtimeline/CockTailHour.png",
   },
   {
-    time: "4:00 PM",
+    time: "6:00 PM",
     title: "Program Starts",
-    description: `Celebrate the grand entrance of ${groomNickname} & ${brideNickname} and the start of the evening festivities.`,
+    // description: `Celebrate the grand entrance of ${groomNickname} & ${brideNickname} and the start of the evening festivities.`,
     location: receptionVenue,
     icon: FireworksIcon,
     imageSrc: "/weddingtimeline/reception welcom.png",
   },
   {
-    time: "6:00 PM",
+    time: "7:00 PM",
     title: "Dinner Service",
-    description: "Share a relaxed meal together as we continue the celebration.",
+    // description: "Share a relaxed meal together as we continue the celebration.",
     location: receptionVenue,
     icon: DinnerIcon,
     imageSrc: "/weddingtimeline/DinnerService.png",
   },
   {
-    time: "7:00 PM",
+    time: "9:00 PM",
     title: "Party",
-    description: "Let's dance the night away and celebrate this new chapter!",
+    // description: "Let's dance the night away and celebrate this new chapter!",
     location: receptionVenue,
     icon: DanceIcon,
     imageSrc: "/weddingtimeline/SendOff.png",
@@ -101,7 +107,7 @@ export function WeddingTimeline() {
   return (
     <Section
       id="wedding-timeline"
-      className="relative py-8 sm:py-10 md:py-14 lg:py-18 overflow-hidden"
+      className="relative py-10 sm:py-12 md:py-16 lg:py-20 overflow-hidden"
     >
       {/* Corner floral decoration - white */}
       <div className="absolute inset-0 pointer-events-none z-[1]">
@@ -143,47 +149,56 @@ export function WeddingTimeline() {
         />
       </div>
 
-      {/* Header - white text */}
-      <div className="relative z-10 text-center mb-6 sm:mb-9 md:mb-12 px-3 sm:px-4">
+      {/* Header */}
+      <div className="relative z-10 text-center mb-8 sm:mb-10 md:mb-12 px-3 sm:px-4">
         <p
-          className={`${cormorant.className} text-[0.7rem] sm:text-xs md:text-sm tracking-[0.3em] uppercase mb-2 text-motif-cream`}
+          className={`${cormorant.className} text-[0.85rem] sm:text-base md:text-lg tracking-[0.04em] lowercase mb-1 drop-shadow-sm`}
+          style={{ color: TIMELINE_TEXT }}
         >
-          Day Schedule
+          wedding day
         </p>
 
-        <h2 className={`${cinzel.className} text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal mb-1.5 sm:mb-3 md:mb-4 text-motif-cream`}>
-          Wedding Timeline
+        <h2
+          className={`${cinzel.className} text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-[0.95] mb-2 drop-shadow`}
+          style={{ color: TIMELINE_TEXT }}
+        >
+          timeline
         </h2>
 
-        <p className={`${cormorant.className} text-[11px] sm:text-sm md:text-base lg:text-lg max-w-xl mx-auto leading-relaxed px-2 text-motif-cream/90`}>
+        <p
+          className={`${cormorant.className} text-[11px] sm:text-sm md:text-base lg:text-lg max-w-xl mx-auto leading-relaxed px-2 opacity-90 drop-shadow-sm`}
+          style={{ color: TIMELINE_TEXT }}
+        >
           A simple overview of the key moments of our day, from arrival to farewell.
         </p>
 
-        <div className="flex items-center justify-center gap-2 mt-3 sm:mt-4">
-          <div className="w-8 sm:w-12 md:w-16 h-px bg-motif-cream/50" />
-          <div className="w-1.5 h-1.5 bg-motif-cream/80 rounded-full" />
-          <div className="w-1.5 h-1.5 bg-motif-cream/60 rounded-full" />
-          <div className="w-1.5 h-1.5 bg-motif-cream/80 rounded-full" />
-          <div className="w-8 sm:w-12 md:w-16 h-px bg-motif-cream/50" />
+        <div className="flex items-center justify-center gap-2 mt-4 sm:mt-5">
+          <div
+            className="w-10 sm:w-14 md:w-20 h-px opacity-50"
+            style={{ backgroundColor: "color-mix(in srgb, var(--color-motif-cream) 55%, transparent)" }}
+          />
+          <div className="w-1.5 h-1.5 rounded-full opacity-80" style={{ backgroundColor: TIMELINE_TEXT }} />
+          <div className="w-1.5 h-1.5 rounded-full opacity-55" style={{ backgroundColor: TIMELINE_TEXT }} />
+          <div className="w-1.5 h-1.5 rounded-full opacity-80" style={{ backgroundColor: TIMELINE_TEXT }} />
+          <div
+            className="w-10 sm:w-14 md:w-20 h-px opacity-50"
+            style={{ backgroundColor: "color-mix(in srgb, var(--color-motif-cream) 55%, transparent)" }}
+          />
         </div>
       </div>
 
       {/* Timeline */}
       <div className="relative z-10 max-w-6xl mx-auto px-3 sm:px-5 lg:px-8">
+        {/* Center line */}
         <div
-          className="hidden md:block absolute left-[4rem] md:left-[5rem] lg:left-[6rem] top-0 bottom-0 w-0.5 bg-gradient-to-b pointer-events-none opacity-50"
-          style={{ background: 'linear-gradient(to bottom, color-mix(in srgb, var(--color-motif-deep) 25%, transparent), color-mix(in srgb, var(--color-motif-deep) 53%, transparent), color-mix(in srgb, var(--color-motif-deep) 25%, transparent))' }}
-        >
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full" style={{ backgroundColor: TIMELINE_TEXT }} />
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full" style={{ backgroundColor: TIMELINE_TEXT }} />
-        </div>
-
-        <div
-          className="md:hidden absolute left-10 sm:left-11 top-0 bottom-0 w-0.5 pointer-events-none opacity-55"
-          style={{ background: 'linear-gradient(to bottom, color-mix(in srgb, var(--color-motif-deep) 27%, transparent), color-mix(in srgb, var(--color-motif-deep) 60%, transparent), color-mix(in srgb, var(--color-motif-deep) 27%, transparent))' }}
+          className="absolute left-1/2 -translate-x-1/2 inset-y-0 w-[2px] sm:w-px pointer-events-none opacity-80 z-0"
+          style={{
+            background:
+              "linear-gradient(to bottom, transparent, color-mix(in srgb, var(--color-motif-cream) 60%, transparent), transparent)",
+          }}
         />
 
-        <div className="space-y-4 sm:space-y-5 md:space-y-8 lg:space-y-10">
+        <div className="space-y-7 sm:space-y-8 md:space-y-10 lg:space-y-12">
           {timelineEvents.map((event, index) => (
             <TimelineItem key={event.title} event={event} index={index} />
           ))}
@@ -203,86 +218,129 @@ function TimelineItem({ event, index }: { event: TimelineEvent; index: number })
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-30px" }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="relative"
+      className="relative z-10"
     >
-      {/* Desktop layout: left-aligned with icon on left */}
-      <div className="hidden md:flex items-center gap-6 lg:gap-8">
-        {/* Icon on the left - centered vertically */}
-        <div className="relative z-10 flex-shrink-0 flex items-center">
-          <IconBadge Icon={Icon} imageSrc={event.imageSrc} />
+      {/* Desktop: alternating left/right text with opposite-side icon, centered line + dot */}
+      <div className="hidden md:grid grid-cols-[1fr_auto_1fr] items-center gap-x-10 lg:gap-x-14">
+        {/* Left side */}
+        <div className={`${isEven ? "" : "text-right"}`}>
+          <div className="flex items-center justify-end gap-4">
+            {!isEven ? <TimelineText event={event} align="right" /> : <IconMark Icon={Icon} imageSrc={event.imageSrc} />}
+            <div
+              className="hidden lg:block w-10 h-px opacity-70"
+              style={{ backgroundColor: "color-mix(in srgb, var(--color-motif-cream) 65%, transparent)" }}
+            />
+          </div>
         </div>
 
-        {/* Card on the right */}
-        <div className="flex-1">
-          <TimelineCard event={event} Icon={Icon} />
+        {/* Center dot */}
+        <div className="relative flex items-center justify-center">
+          <div className="w-2 h-2 rounded-full" style={{ backgroundColor: TIMELINE_TEXT }} />
+        </div>
+
+        {/* Right side */}
+        <div>
+          <div className="flex items-center justify-start gap-4">
+            <div
+              className="hidden lg:block w-10 h-px opacity-70"
+              style={{ backgroundColor: "color-mix(in srgb, var(--color-motif-cream) 65%, transparent)" }}
+            />
+            {isEven ? <TimelineText event={event} align="left" /> : <IconMark Icon={Icon} imageSrc={event.imageSrc} />}
+          </div>
         </div>
       </div>
 
-      {/* Mobile layout: compact stacked */}
-      <div className="md:hidden flex items-center gap-4">
-        <div className="relative z-10 flex-shrink-0 flex items-center">
-          <IconBadge Icon={Icon} mobile imageSrc={event.imageSrc} />
+      {/* Mobile: centered line + alternating text/icon */}
+      <div className="md:hidden grid grid-cols-[1fr_auto_1fr] items-center gap-x-4 sm:gap-x-6">
+        {/* Left side */}
+        <div className={`${isEven ? "" : "text-right"}`}>
+          <div className="flex items-center justify-end gap-3">
+            {!isEven ? <TimelineText event={event} align="right" mobile /> : <IconMark Icon={Icon} imageSrc={event.imageSrc} mobile />}
+            <div
+              className="w-6 h-px opacity-70"
+              style={{ backgroundColor: "color-mix(in srgb, var(--color-motif-cream) 65%, transparent)" }}
+            />
+          </div>
         </div>
-        <div className="flex-1 min-w-0">
-          <TimelineCard event={event} Icon={Icon} mobile />
+
+        {/* Center dot */}
+        <div className="relative flex items-center justify-center">
+          <div className="w-2 h-2 rounded-full" style={{ backgroundColor: TIMELINE_TEXT }} />
+        </div>
+
+        {/* Right side */}
+        <div>
+          <div className="flex items-center justify-start gap-3">
+            <div
+              className="w-6 h-px opacity-70"
+              style={{ backgroundColor: "color-mix(in srgb, var(--color-motif-cream) 65%, transparent)" }}
+            />
+            {isEven ? <TimelineText event={event} align="left" mobile /> : <IconMark Icon={Icon} imageSrc={event.imageSrc} mobile />}
+          </div>
         </div>
       </div>
     </motion.div>
   )
 }
 
-function TimelineCard({ event, Icon, mobile }: { event: TimelineEvent; Icon: TimelineIcon; mobile?: boolean }) {
+function TimelineText({
+  event,
+  align,
+  mobile,
+}: {
+  event: TimelineEvent
+  align: "left" | "right"
+  mobile?: boolean
+}) {
+  const textAlign = align === "right" ? "text-right" : "text-left"
   return (
-    <div
-      className={`rounded-lg sm:rounded-xl border backdrop-blur-sm shadow-md hover:shadow-lg transition-all duration-300 ${
-        mobile ? "p-3" : "p-4 sm:p-5 md:p-6 lg:p-7"
-      } max-w-md bg-motif-cream/95`}
-      style={{ borderColor: 'color-mix(in srgb, var(--color-motif-deep) 31%, transparent)', boxShadow: '0 4px 20px color-mix(in srgb, var(--color-motif-deep) 8%, transparent)' }}
-    >
-      <div className={`${mobile ? "space-y-2" : "space-y-3 md:space-y-4"}`}>
-        <div className="flex items-center gap-1.5">
-          <Clock className={`${mobile ? "w-3.5 h-3.5" : "w-4 h-4 md:w-5 md:h-5"} flex-shrink-0`} style={{ color: TIMELINE_TEXT }} />
-          <p
-            className={`${mobile ? "text-[10px]" : "text-xs sm:text-sm md:text-base"} font-bold tracking-[0.15em] uppercase`}
-            style={{ color: TIMELINE_TEXT }}
-          >
-            {event.time}
-          </p>
-        </div>
+    <div className={`${textAlign} max-w-md ${align === "right" ? "ml-auto" : "mr-auto"}`}>
+      <p
+        className={`${cinzel.className} ${
+          mobile ? "text-[0.7rem]" : "text-[0.75rem] lg:text-sm"
+        } tracking-[0.22em] uppercase drop-shadow-sm`}
+        style={{ color: TIMELINE_TEXT }}
+      >
+        {event.title}
+      </p>
+      <p
+        className={`${cormorant.className} ${
+          mobile ? "text-[0.75rem]" : "text-sm lg:text-base"
+        } mt-0.5 opacity-95 drop-shadow-sm`}
+        style={{ color: TIMELINE_TEXT }}
+      >
+        at {event.time}
+      </p>
 
-        <h3
-          className={`${mobile ? "text-sm sm:text-base" : "text-base sm:text-lg md:text-xl lg:text-2xl"} ${cinzel.className} font-semibold leading-tight`}
+      {event.description && (
+        <p
+          className={`${cormorant.className} ${
+            mobile ? "text-[10px]" : "text-xs lg:text-sm"
+          } mt-1.5 leading-relaxed opacity-90 drop-shadow-sm`}
           style={{ color: TIMELINE_TEXT }}
         >
-          {event.title}
-        </h3>
+          {event.description}
+        </p>
+      )}
 
-        {event.description && (
+      {event.location && (
+        <div
+          className={`mt-1.5 flex items-start gap-1.5 ${align === "right" ? "justify-end" : "justify-start"} opacity-90`}
+        >
+          <MapPin className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 drop-shadow-sm" style={{ color: TIMELINE_TEXT }} />
           <p
-            className={`${mobile ? "text-[10px] sm:text-xs" : "text-xs sm:text-sm md:text-base"} ${cormorant.className} leading-relaxed opacity-90`}
+            className={`${cormorant.className} ${mobile ? "text-[10px]" : "text-xs lg:text-sm"} leading-relaxed drop-shadow-sm`}
             style={{ color: TIMELINE_TEXT }}
           >
-            {event.description}
+            {event.location}
           </p>
-        )}
-
-        {event.location && (
-          <div
-            className={`flex items-start gap-1.5 ${mobile ? "pt-1.5" : "pt-2 md:pt-3"} border-t`}
-            style={{ borderColor: 'color-mix(in srgb, var(--color-motif-deep) 25%, transparent)' }}
-          >
-            <MapPin className={`${mobile ? "w-3 h-3" : "w-3.5 h-3.5 md:w-4 md:h-4"} mt-0.5 flex-shrink-0`} style={{ color: TIMELINE_TEXT }} />
-            <p className={`${mobile ? "text-[10px]" : "text-xs md:text-sm"} ${cormorant.className} leading-relaxed opacity-90`} style={{ color: TIMELINE_TEXT }}>
-              {event.location}
-            </p>
-          </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   )
 }
 
-function IconBadge({
+function IconMark({
   Icon,
   mobile,
   imageSrc,
@@ -296,11 +354,11 @@ function IconBadge({
       <Image
         src={imageSrc}
         alt=""
-        width={200}
-        height={200}
+        width={96}
+        height={96}
         className={`${
-          mobile ? "w-20 h-20" : "w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48"
-        } object-contain brightness-0 invert`}
+          mobile ? "w-16 h-16" : "w-18 h-18 lg:w-22 lg:h-22"
+        } object-contain brightness-0 invert drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]`}
       />
     )
   }
@@ -308,11 +366,11 @@ function IconBadge({
   return (
     <div
       className={`${
-        mobile ? "w-10 h-10" : "w-14 h-14 md:w-16 md:h-16 lg:w-20 lg:h-20"
-      } rounded-full border-2 bg-white flex items-center justify-center shadow-md hover:scale-105 transition-transform duration-300`}
-      style={{ borderColor: 'color-mix(in srgb, var(--color-motif-deep) 60%, transparent)' }}
+        mobile ? "w-14 h-14" : "w-16 h-16 lg:w-18 lg:h-18"
+      } rounded-full border bg-white/15 flex items-center justify-center drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]`}
+      style={{ borderColor: "color-mix(in srgb, var(--color-motif-cream) 45%, transparent)" }}
     >
-      <Icon className={`${mobile ? "w-5 h-5" : "w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8"}`} style={{ color: TIMELINE_TEXT }} />
+      <Icon className={`${mobile ? "w-7 h-7" : "w-8 h-8 lg:w-9 lg:h-9"}`} style={{ color: TIMELINE_TEXT }} />
     </div>
   )
 }
@@ -332,20 +390,6 @@ function GuestsIcon(props: React.SVGProps<SVGSVGElement>) {
   )
 }
 
-function ChurchIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 32 32" fill="none" stroke={iconStroke} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <path d="M16 3v6" />
-      <path d="M13.5 6H18.5" />
-      <path d="M8 26V14l8-5 8 5v12" />
-      <path d="M6 26h20" />
-      <path d="M14 26v-6a2 2 0 0 1 4 0v6" />
-      <path d="M11 18h-3" />
-      <path d="M24 18h-3" />
-    </svg>
-  )
-}
-
 function RingsIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 32 32" fill="none" stroke={iconStroke} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -353,16 +397,6 @@ function RingsIcon(props: React.SVGProps<SVGSVGElement>) {
       <circle cx="20" cy="20" r="6" />
       <path d="M14 9 16 5l2 4" />
       <path d="M13 7h6" />
-    </svg>
-  )
-}
-
-function CameraIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 32 32" fill="none" stroke={iconStroke} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <rect x="5" y="9" width="22" height="16" rx="3" />
-      <circle cx="16" cy="17" r="5" />
-      <path d="M11 7h3l1-2h4l1 2h3" />
     </svg>
   )
 }
@@ -382,17 +416,6 @@ function FireworksIcon(props: React.SVGProps<SVGSVGElement>) {
   )
 }
 
-function MicrophoneIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 32 32" fill="none" stroke={iconStroke} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <rect x="13" y="5" width="6" height="11" rx="3" />
-      <path d="M11 12v1a5 5 0 0 0 10 0v-1" />
-      <path d="M16 17v4" />
-      <path d="M12 25h8" />
-    </svg>
-  )
-}
-
 function DinnerIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 32 32" fill="none" stroke={iconStroke} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -405,18 +428,6 @@ function DinnerIcon(props: React.SVGProps<SVGSVGElement>) {
   )
 }
 
-function CarIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 32 32" fill="none" stroke={iconStroke} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <path d="M6 21v-4l3-6h14l3 6v4" />
-      <path d="M8 21h16" />
-      <circle cx="11" cy="22.5" r="1.8" />
-      <circle cx="21" cy="22.5" r="1.8" />
-      <path d="M14 11.5 16 9l2 2.5" />
-    </svg>
-  )
-}
-
 function CocktailIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 32 32" fill="none" stroke={iconStroke} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -425,21 +436,6 @@ function CocktailIcon(props: React.SVGProps<SVGSVGElement>) {
       <path d="M10 12h12l-1-4H11l-1 4Z" />
       <circle cx="16" cy="8" r="2" />
       <path d="M12 16h8" />
-    </svg>
-  )
-}
-
-function CakeIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 32 32" fill="none" stroke={iconStroke} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <rect x="8" y="18" width="16" height="8" rx="1" />
-      <rect x="10" y="12" width="12" height="6" rx="1" />
-      <rect x="12" y="8" width="8" height="4" rx="1" />
-      <circle cx="14" cy="10" r="0.8" />
-      <circle cx="18" cy="10" r="0.8" />
-      <circle cx="13" cy="15" r="0.8" />
-      <circle cx="19" cy="15" r="0.8" />
-      <path d="M16 5v3" />
     </svg>
   )
 }

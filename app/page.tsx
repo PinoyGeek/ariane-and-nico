@@ -70,16 +70,16 @@ export default function Home() {
               <LoveStory />
               <Countdown />
               <Gallery />
-              <Messages />
+              {/* <Messages /> */}
               <Details />
               {/* <GuestInformation /> */}
               <Entourage />
               <WeddingTimeline />
               {/* <PrincipalSponsors /> */}
               <FAQ />
+              <Registry />
               <GuestList />
               <BookOfGuests />
-              <Registry />
               <SnapShare />
               <Footer />
             </div>

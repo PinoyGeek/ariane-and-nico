@@ -1,9 +1,9 @@
 export const siteConfig = {
   couple: {
-    bride: "Ltryl B. Benitez",
-    brideNickname: "Ltryl ",
-    groom: "Noenyl Bryle M. Gonzaga",
-    groomNickname: "Bryle",
+    bride: "Noenyl Bryle M. Gonzaga", //Noenyl Bryle M. Gonzaga
+    brideNickname: "Bryle ", //Ltryl
+    groom: "Ltryl B. Benitez", //Ltryl B. Benitez
+    groomNickname: "Ltryl", //Ltryl
   },
   wedding: {
     date: "May 18, 2026",
@@ -11,11 +11,11 @@ export const siteConfig = {
     venue: "Farm Hills Garden, Silang, Cavite",
     tagline: "are getting married!",
     theme: "Our wedding palette is inspired by timeless elegance and warmth.Motif Colors: Champagne Gold, Soft Beige, Warm Soft Brown",
-    motif: "#5B6655, #9CAA99, #ECE5DB, #C4D1E2, #8799A7, #A9A9A9",
+    motif: "#9CAA99, #C4D1E2, #8799A7, #997C76, #A9A9A9, #D5D1C8",
   },
   details: {
     rsvp: {
-      deadline: "April 15, 2026.",
+      deadline: "April 10, 2026.",
       contact: "Ltryl B. Benitez",
       phone: "0936 815 3245",
     },
@@ -37,7 +37,7 @@ export const siteConfig = {
   },
   dressCode: {
       theme: "SEMI-FORMAL",
-    colors: "#5B6655, #9CAA99, #ECE5DB, #C4D1E2, #8799A7, #A9A9A9",
+    colors: "#9CAA99, #C4D1E2, #8799A7, #997C76, #A9A9A9, #D5D1C8",
     sponsors: {
       male: "Guests are kindly requested to wear attire in any of the shades within our wedding palette.Color pallet and image to be followed. STRICTLY no shorts, maong jeans, t-shirts, or slippers.",
       female: "Guests are kindly requested to wear attire in any of the shades within our wedding palette.Color pallet and image to be followed. STRICTLY no shorts, maong jeans, t-shirts, or slippers."
@@ -77,7 +77,7 @@ Now, as they prepare to say yes before God and the people they love most, Cather
   },
   snapShare: {
     googleDriveLink: "https://drive.google.com/drive/folders/1OHc4gq4VHPequrPTjIrV6-YpZ5ctk9lo?usp=sharing",
-    hashtag: ["#BryleAndLtryl", "#LtrylAndBryle", "#BryleAndLtrylWedding"],
+    hashtag: ["#ForeverBRYLEongingToLTRYL"],
     instructions: "Please scan this QR Code, create a folder with your name and upload the photos and videos you have taken during our wedding reception. We are delighted to see your snaps too!",
   },
 }

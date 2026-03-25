@@ -6,6 +6,9 @@ import Image from "next/image"
 type ImageItem = {
   src: string
   category: "desktop" | "mobile" | "front" | "gallery"
+  width: number
+  height: number
+  orientation: "portrait" | "landscape"
 }
 
 export default function MasonryGallery({ images }: { images: ImageItem[] }) {
@@ -38,6 +41,10 @@ export default function MasonryGallery({ images }: { images: ImageItem[] }) {
     }
   }
 
+  const getCardAspect = (image: ImageItem) => {
+    return image.category === "desktop" ? "aspect-[4/3]" : "aspect-[4/5]"
+  }
+
   return (
     <div ref={topRef} className="relative">
       {/* Header (buttons removed per request) */}
@@ -62,9 +69,9 @@ export default function MasonryGallery({ images }: { images: ImageItem[] }) {
           >
             <div className="relative w-full overflow-hidden rounded-xl border border-[#606C60]/40 bg-white/5 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:border-[#606C60]/60">
               {!loaded[img.src] && (
-                <div className="aspect-[4/5] sm:aspect-[4/5] w-full animate-pulse bg-gradient-to-br from-[#606C60]/30 via-[#E1D5C7]/25 to-[#606C60]/30" />
+                <div className={`${getCardAspect(img)} w-full animate-pulse bg-gradient-to-br from-[#606C60]/30 via-[#E1D5C7]/25 to-[#606C60]/30`} />
               )}
-              <div className="relative aspect-[4/5] sm:aspect-[4/5] w-full">
+              <div className={`relative w-full ${getCardAspect(img)}`}>
                 <Image
                   src={img.src}
                   alt=""
@@ -103,8 +110,8 @@ export default function MasonryGallery({ images }: { images: ImageItem[] }) {
               <Image
                 src={filtered[lightboxIdx].src}
                 alt=""
-                width={1200}
-                height={1600}
+                width={filtered[lightboxIdx].width}
+                height={filtered[lightboxIdx].height}
                 className="max-h-[80vh] w-auto rounded-xl shadow-2xl border border-[#606C60]/30 object-contain"
                 quality={95}
                 priority={true}

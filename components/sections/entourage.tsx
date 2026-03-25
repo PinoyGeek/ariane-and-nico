@@ -99,6 +99,20 @@ const ROLE_CATEGORY_ORDER = [
   "Flower Girls",
 ]
 
+const HIDDEN_ROLE_CATEGORIES = new Set([
+  "Candle Sponsors",
+  "Veil Sponsors",
+  "Cord Sponsors",
+])
+
+function normalizeRoleCategory(category: string): string {
+  const normalized = category.trim()
+  if (normalized.toLowerCase() === "officiating minister") {
+    return "OFFICIATING MINISTER"
+  }
+  return normalized
+}
+
 export function Entourage() {
   const [entourage, setEntourage] = useState<EntourageMember[]>([])
   const [sponsors, setSponsors] = useState<PrincipalSponsor[]>([])
@@ -186,7 +200,7 @@ export function Entourage() {
     const grouped: Record<string, EntourageMember[]> = {}
     
     entourage.forEach((member) => {
-      const category = member.RoleCategory
+      const category = normalizeRoleCategory(member.RoleCategory)
 
       // Skip members without a category or in "Other"
       if (!category || category === "Other") {
@@ -200,6 +214,9 @@ export function Entourage() {
     
     return grouped
   }, [entourage])
+
+  const hasParents =
+    (grouped["Parents of the Groom"]?.length ?? 0) > 0 || (grouped["Parents of the Bride"]?.length ?? 0) > 0
 
   // Helper component for elegant section titles (category labels)
   const SectionTitle = ({
@@ -445,6 +462,10 @@ export function Entourage() {
                 const members = grouped[category] || []
                 
                 if (members.length === 0) return null
+                if (HIDDEN_ROLE_CATEGORIES.has(category)) return null
+
+                // Render OFFICIATING MINISTER directly above Principal Sponsors (in Parents block)
+                if (category === "OFFICIATING MINISTER" && hasParents) return null
 
                 // Special handling for The Couple - display Bride and Groom side by side
                 if (category === "The Couple") {
@@ -522,6 +543,26 @@ export function Entourage() {
                           })()}
                         </TwoColumnLayout>
                         
+                        {/* Officiating Minister section - displayed above Principal Sponsors */}
+                        {(() => {
+                          const officiating = grouped["OFFICIATING MINISTER"] || []
+                          if (officiating.length === 0) return null
+                          return (
+                            <div key="OfficiatingMinisterBeforeSponsors" className="mt-4 sm:mt-5 md:mt-6">
+                              <TwoColumnLayout singleTitle="OFFICIATING MINISTER" centerContent={true}>
+                                {officiating.map((member, idx) => (
+                                  <div
+                                    key={`officiating-${idx}-${member.Name}`}
+                                    className="px-1.5 sm:px-2 md:px-2.5 min-[350px]:col-span-2 flex justify-center"
+                                  >
+                                    <NameItem member={member} align="center" showRole={false} />
+                                  </div>
+                                ))}
+                              </TwoColumnLayout>
+                            </div>
+                          )
+                        })()}
+
                         {/* Principal Sponsors section - displayed after Parents */}
                         {sponsors.length > 0 && (
                           <div key="SponsorsAfterParents">
