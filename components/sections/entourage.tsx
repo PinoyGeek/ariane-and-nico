@@ -323,7 +323,7 @@ export function Entourage() {
   }
 
   return (
-    <div className="relative w-full" style={{ backgroundColor: palette.background }}>
+    <div className="relative w-full" style={{ backgroundColor: 'var(--color-motif-cream)' }}>
       {/* Full-bleed layered background — champagne + beige with soft movement */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden>
         {/* Soft diagonal wash */}
@@ -406,7 +406,7 @@ export function Entourage() {
 
         <h2
           className={`${cinzel.className} text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold mb-1 sm:mb-2 md:mb-2.5`}
-          style={{ color: palette.deep, textShadow: "0 2px 10px rgba(78,59,49,0.22)" }}
+          style={{ color: 'var(--color-motif-deep)', textShadow: "0 2px 10px rgba(var(--color-motif-deep), 0.22)" }}
         >
           Wedding Entourage
         </h2>
@@ -426,8 +426,8 @@ export function Entourage() {
         }`}
       >
         <div
-          className="relative bg-motif-cream/95 backdrop-blur-lg rounded-xl sm:rounded-2xl overflow-hidden border shadow-lg transition-all duration-500 group"
-          style={{ borderColor: 'color-mix(in srgb, var(--color-motif-silver) 44%, transparent)', boxShadow: '0 18px 40px color-mix(in srgb, var(--color-motif-deep) 13%, transparent)' }}
+          className="relative bg-motif-cream/95 backdrop-blur-lg rounded-xl sm:rounded-2xl overflow-hidden shadow-lg transition-all duration-500 group"
+          style={{ boxShadow: '0 18px 40px color-mix(in srgb, var(--color-motif-deep) 13%, transparent)' }}
         >
           {/* Card content */}
           <div className="relative p-3 sm:p-4 md:p-5 z-10">

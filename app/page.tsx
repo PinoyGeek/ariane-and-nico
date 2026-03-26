@@ -1,8 +1,7 @@
 "use client"
 
-import { Suspense, useState, useCallback } from "react"
+import { Suspense, useState, useCallback, useEffect } from "react"
 import dynamic from "next/dynamic"
-import { AudioProvider } from "@/contexts/audio-context"
 import { Hero as MainHero } from "@/components/sections/hero"
 import { Welcome } from "@/components/sections/welcome"
 import { Countdown } from "@/components/sections/countdown"
@@ -22,7 +21,6 @@ import { Hero as InvitationHero } from "@/components/loader/Hero"
 import { LoadingScreen } from "@/components/loader/LoadingScreen"
 import { Navbar } from "@/components/navbar"
 import { AppState } from "@/components/types"
-import BackgroundMusic from "@/components/background-music"
 import { SnapShare } from "@/components/sections/snap-share"
 import { CoupleVideo } from "@/components/sections/couple-video"
 
@@ -30,8 +28,33 @@ const Silk = dynamic(() => import("@/components/silk"), { ssr: false })
 const GuestList = dynamic(() => import("@/components/sections/guest-list").then(mod => ({ default: mod.GuestList })), { ssr: false })
 
 export default function Home() {
-  const [appState, setAppState] = useState<AppState>(AppState.LOADING)
+  // Skip loading/landing only when returning from /gallery.
+  // The flag is set by the "View Full Gallery" button and cleared immediately
+  // here so a page refresh always replays the loading screen.
+  const [appState, setAppState] = useState<AppState>(() => {
+    if (typeof window !== "undefined") {
+      const returning = sessionStorage.getItem("returnFromGallery")
+      if (returning === "true") {
+        sessionStorage.removeItem("returnFromGallery")
+        return AppState.DETAILS
+      }
+    }
+    return AppState.LOADING
+  })
   const enableDecor = process.env.NEXT_PUBLIC_ENABLE_DECOR !== 'false'
+
+  // When returning from /gallery, scroll to the #gallery hash in the URL
+  useEffect(() => {
+    if (appState !== AppState.DETAILS) return
+    const hash = window.location.hash
+    if (!hash) return
+    // Small delay lets the page paint before scrolling
+    const id = setTimeout(() => {
+      const el = document.querySelector(hash)
+      if (el) el.scrollIntoView({ behavior: "smooth" })
+    }, 100)
+    return () => clearTimeout(id)
+  }, [appState])
 
   const handleLoadingComplete = useCallback(() => {
     setAppState(AppState.LANDING)
@@ -43,7 +66,6 @@ export default function Home() {
   }, [])
 
   return (
-    <AudioProvider>
       <div className="relative min-h-screen bg-cloud text-charcoal selection:bg-birch selection:text-nut overflow-hidden font-sans">
         {appState === AppState.LOADING && <LoadingScreen onComplete={handleLoadingComplete} />}
 
@@ -51,11 +73,10 @@ export default function Home() {
           <InvitationHero onOpen={handleOpenInvitation} visible={appState === AppState.LANDING} />
 
           <div className={`transition-opacity duration-700 ${appState === AppState.DETAILS ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
-            {enableDecor && <BackgroundMusic />}
             {enableDecor && (
               <div className="fixed inset-0 z-0 pointer-events-none">
                 <Suspense fallback={<div className="w-full h-full bg-gradient-to-b from-primary/10 to-secondary/5" />}>
-                  <Silk speed={5} scale={1.1} color="#9CAA99" noiseIntensity={0.8} rotation={0.3} />
+                  <Silk speed={5} scale={1.1} color="#D88C9A" noiseIntensity={0.8} rotation={0.3} />
                 </Suspense>
               </div>
             )}
@@ -70,22 +91,22 @@ export default function Home() {
               <LoveStory />
               <Countdown />
               <Gallery />
-              {/* <Messages /> */}
+
               <Details />
               {/* <GuestInformation /> */}
               <Entourage />
               <WeddingTimeline />
               {/* <PrincipalSponsors /> */}
               <FAQ />
-              <Registry />
               <GuestList />
               <BookOfGuests />
+              <Registry />
               <SnapShare />
+              <Messages />
               <Footer />
             </div>
           </div>
         </main>
       </div>
-    </AudioProvider>
   )
 }

@@ -34,12 +34,13 @@ export function LoveStory() {
         theme="light"
         layout="image-left"
         isFirst={true}
-        title="First Met (2014)"
-        imageSrc="/slide/lovestory.png"
+        title="Tara, Bible study?"
+        imageSrc="/mobile-background/couple (7).webp"
         text={
           <>
             <p className="mb-4">
-            We met as first-year students at the Adventist University of the Philippines. What began as a simple classroom encounter slowly turned into a meaningful friendship.
+            "
+            That simple and playful message from Kenneth on July 4, 2021, at 12:15 AM changed everything. We had always known of each other-living in the same barangay-but never truly felt each other's presence. Then came that moment, and with it, a conversation that opened the door to something beautiful.
             </p>
            
           </>
@@ -50,12 +51,12 @@ export function LoveStory() {
       <StorySection
         theme="dark"
         layout="image-right"
-        imageSrc="/LoveStory/img2.png"
-        title="Became a Couple (2019)"
+        imageSrc="/mobile-background/couple (8).webp"
+        // title="Became a Couple (2019)"
         text={
           <>
             <p>
-            After years of growing together and getting to know each other more deeply, we finally made it official. Our story first began at AUP, and during one unforgettable summer road trip, we took a leap of faith and chose each other.
+            What we discovered first wasn't love. It was comfort. It was familiarity, like finding home in someone's words and presence. Despite our obvious differences, we found joy in each other's company. Our days became filled with laughter, adventure, faith, and, eventually, love.
             </p>
           </>
         }
@@ -66,12 +67,12 @@ export function LoveStory() {
         theme="light"
         layout="image-left"
         isLast={true}
-        imageSrc="/LoveStory/img3.png"
-        title="The Proposal (2025)"
+        imageSrc="/mobile-background/couple (9).webp"
+        // title="The Proposal (2025)"
         text={
           <>
             <p>
-            As we continue chasing our dreams, we also choose to begin our greatest journey — becoming one. With love, faith, and God at the center, we said yes to forever
+            From that late-night message to this day, our story has been a journey of grace and growth - a testament that when God writes your love story, it begins with something simple yet extraordinary.
             </p>
            
           </>

@@ -40,16 +40,13 @@ export function Details() {
   const [rotationOffset, setRotationOffset] = useState(0)
   
   const coupleImages = [
-    "/slide/mobile/couple (1).jpg",
-    "/slide/mobile/couple (2).jpg",
-    "/slide/mobile/couple (3).jpg",
-    "/slide/mobile/couple (4).jpg",
+    "/mobile-background/couple (20).webp",
+    "/mobile-background/couple (21).webp",
+    "/mobile-background/couple (23).webp",
+    "/mobile-background/couple (22).webp",
   ]
 
-  const receptionImages = [
-    "/Details/La Vida Resort and Events Center.png",
-    "/Details/La Vida Resort and Events Center 2.png"
-  ]
+  const receptionImages = siteConfig.reception.image
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -216,7 +213,7 @@ export function Details() {
             {/* Venue Image */}
             <div className="relative w-full h-64 sm:h-72 md:h-80 lg:h-96 xl:h-[30rem] overflow-hidden">
               <Image
-                src="/Details/ceremonynew.png"
+                src={siteConfig.ceremony.image}
                 alt={siteConfig.ceremony.location}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -230,7 +227,7 @@ export function Details() {
                 {/* <p className="text-sm sm:text-base md:text-lg font-[family-name:var(--font-ephesis)] text-[#FFF7F6] mb-1 sm:mb-2 drop-shadow-lg">
                   Ceremony
                 </p> */}
-                <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-[family-name:var(--font-crimson)] font-normal text-white mb-0.5 sm:mb-1 drop-shadow-lg uppercase tracking-[0.1em] leading-tight">
+                <h3 className={`${cinzel.className} text-lg sm:text-xl md:text-2xl lg:text-3xl font-[family-name:var(--font-crimson)] font-normal text-white mb-0.5 sm:mb-1 drop-shadow-lg uppercase tracking-[0.1em] leading-tight`}>
                   {siteConfig.ceremony.location}
                 </h3>
                 <p className={`${cinzel.className} text-xs sm:text-sm md:text-base text-white/95 drop-shadow-md tracking-wide`}>
@@ -251,18 +248,18 @@ export function Details() {
                 {/* Month - Script style with warm gold */}
                 <div className="mb-2 sm:mb-4">
                   <p className={`${cinzel.className} text-xl sm:text-2xl md:text-3xl lg:text-4xl text-motif-medium leading-none`}>
-                    May
+                  {new Date(siteConfig.ceremony.date).toLocaleString('default', { month: 'long' })}
                   </p>
                 </div>
                 
                 {/* Day and Year */}
                 <div className="flex items-center justify-center gap-2 sm:gap-3 md:gap-4 mb-4 sm:mb-6 md:mb-7">
                   <p className={`${cinzel.className} text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-motif-deep leading-none`}>
-                    18
+                  {new Date(siteConfig.ceremony.date).getDate()}
                   </p>
                   <div className="h-10 sm:h-12 md:h-16 lg:h-20 w-[2px] bg-gradient-to-b from-motif-medium via-motif-deep to-motif-medium" />
                   <p className={`${cinzel.className} text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light text-motif-deep leading-none`}>
-                    2026
+                  {new Date(siteConfig.ceremony.date).getFullYear()}
                   </p>
                 </div>
 
@@ -287,15 +284,15 @@ export function Details() {
                     <p className="text-xs sm:text-sm md:text-base font-[family-name:var(--font-crimson)] font-semibold text-motif-deep mb-1.5 sm:mb-2 uppercase tracking-wide">
                       Location
                     </p>
-                    <p className="text-xs sm:text-sm md:text-base lg:text-lg font-[family-name:var(--font-crimson)] text-motif-deep leading-relaxed">
+                    <p className={`${cinzel.className} text-xs sm:text-sm md:text-base lg:text-lg font-[family-name:var(--font-crimson)] text-motif-deep leading-relaxed`}>
                       {ceremonyVenueName}
                     </p>
                     {ceremonyVenueDetail && (
-                      <p className="text-[10px] sm:text-xs md:text-sm font-[family-name:var(--font-crimson)] text-motif-medium/70 leading-relaxed mt-1">
+                      <p className={`${cinzel.className} text-[10px] sm:text-xs md:text-sm font-[family-name:var(--font-crimson)] text-motif-medium/70 leading-relaxed mt-1`}>
                         {ceremonyVenueDetail}
                       </p>
                     )}
-                    <p className="text-[10px] sm:text-xs md:text-sm font-[family-name:var(--font-crimson)] text-motif-deep/70 leading-relaxed">
+                    <p className={`${cinzel.className} text-[10px] sm:text-xs md:text-sm font-[family-name:var(--font-crimson)] text-motif-deep/70 leading-relaxed`}>
                       {ceremonyAddress}
                     </p>
                   </div>
@@ -307,8 +304,8 @@ export function Details() {
                         size={80}
                         level="M"
                         includeMargin={false}
-                        fgColor="#5B6655"
-                        bgColor="#ECE5DB"
+                        fgColor="var(--color-motif-deep)"
+                        bgColor="var(--color-motif-cream)"
                       />
                     </div>
                     <p className="text-[9px] sm:text-[10px] md:text-xs font-[family-name:var(--font-crimson)] text-motif-deep/60 italic text-center max-w-[80px]">
@@ -346,7 +343,7 @@ export function Details() {
         </div>
 
         {/* Reception Card */}
-        {/* <div className="relative group">
+        <div className="relative group">
           <div className="absolute -inset-1 bg-gradient-to-br from-motif-silver/22 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-lg" />
 
           <div className="relative elegant-card bg-motif-cream rounded-xl sm:rounded-2xl overflow-hidden shadow-[0_16px_40px_rgba(0,0,0,0.18)] border border-motif-deep/25 premium-shadow hover:border-motif-deep/45 transition-all duration-300">
@@ -360,7 +357,7 @@ export function Details() {
                   }`}
                 >
                   <Image
-                    src="/Details/reception.png"
+                    src={src}
                     alt={siteConfig.reception.venue}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -373,13 +370,13 @@ export function Details() {
               
           
               <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 md:bottom-6 md:left-6 right-3 sm:right-4 md:right-6 z-20">
-                <p className="text-sm sm:text-base md:text-lg font-[family-name:var(--font-ephesis)] text-[#FFF7F6] mb-1 sm:mb-2 drop-shadow-lg">
+                {/* <p className="text-sm sm:text-base md:text-lg font-[family-name:var(--font-ephesis)] text-[#FFF7F6] mb-1 sm:mb-2 drop-shadow-lg">
                   Reception
-                </p>
-                <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-[family-name:var(--font-crimson)] font-normal text-white mb-0.5 sm:mb-1 drop-shadow-lg uppercase tracking-[0.1em] leading-tight">
+                </p> */}
+                <h3 className={`${cinzel.className} text-lg sm:text-xl md:text-2xl lg:text-3xl font-[family-name:var(--font-crimson)] font-normal text-white mb-0.5 sm:mb-1 drop-shadow-lg uppercase tracking-[0.1em] leading-tight`}>
                   {siteConfig.reception.location}
                 </h3>
-                <p className="text-xs sm:text-sm md:text-base font-[family-name:var(--font-crimson)] text-white/95 drop-shadow-md tracking-wide">
+                <p className={`${cinzel.className} text-xs sm:text-sm md:text-base font-[family-name:var(--font-crimson)] text-white/95 drop-shadow-md tracking-wide`}>
                   {siteConfig.reception.venue}
                 </p>
               </div>
@@ -389,15 +386,15 @@ export function Details() {
          
               <div className="text-center mb-5 sm:mb-8">
                 {siteConfig.reception.time === "To follow after the ceremony" ? (
-                  <p className="text-sm sm:text-base md:text-lg lg:text-xl font-[family-name:var(--font-crimson)]  font-semibold text-motif-deep tracking-wide">
+                  <p className={`${cinzel.className} text-sm sm:text-base md:text-lg lg:text-xl font-[family-name:var(--font-crimson)]  font-semibold text-motif-deep tracking-wide`}>
                     To follow after the ceremony
                   </p>
                 ) : (
                   <>
-                    <p className="text-[10px] sm:text-xs md:text-sm font-[family-name:var(--font-crimson)] font-semibold text-motif-medium uppercase tracking-[0.2em] mb-2 sm:mb-3">
+                    <p className={`${cinzel.className} text-[10px] sm:text-xs md:text-sm font-[family-name:var(--font-crimson)] font-semibold text-motif-medium uppercase tracking-[0.2em] mb-2 sm:mb-3`}>
                       {siteConfig.reception.time === "After ceremony" ? "Starts" : "Starts at"}
                     </p>
-                    <p className="text-sm sm:text-base md:text-lg lg:text-xl font-[family-name:var(--font-crimson)] font-semibold text-motif-deep tracking-wide">
+                    <p className={`${cinzel.className} text-sm sm:text-base md:text-lg lg:text-xl font-[family-name:var(--font-crimson)] font-semibold text-motif-deep tracking-wide`}>
                       {siteConfig.reception.time}
                     </p>
                   </>
@@ -412,15 +409,15 @@ export function Details() {
                     <p className="text-xs sm:text-sm md:text-base font-[family-name:var(--font-crimson)] font-semibold text-motif-deep mb-1.5 sm:mb-2 uppercase tracking-wide">
                       Location
                     </p>
-                    <p className="text-xs sm:text-sm md:text-base lg:text-lg font-[family-name:var(--font-crimson)] text-motif-deep leading-relaxed">
+                    <p className={`${cinzel.className} text-xs sm:text-sm md:text-base lg:text-lg font-[family-name:var(--font-crimson)] text-motif-deep leading-relaxed`}>
                       {receptionVenueName}
                     </p>
                     {receptionVenueDetail && (
-                    <p className="text-[10px] sm:text-xs md:text-sm font-[family-name:var(--font-crimson)] text-motif-deep/70 leading-relaxed mt-1">
+                    <p className={`${cinzel.className} text-[10px] sm:text-xs md:text-sm font-[family-name:var(--font-crimson)] text-motif-deep/70 leading-relaxed mt-1`}>
                         {receptionVenueDetail}
                       </p>
                     )}
-                    <p className="text-[10px] sm:text-xs md:text-sm font-[family-name:var(--font-crimson)] text-motif-deep/70 leading-relaxed">
+                    <p className={`${cinzel.className} text-[10px] sm:text-xs md:text-sm font-[family-name:var(--font-crimson)] text-motif-deep/70 leading-relaxed`}>
                       {receptionAddress}
                     </p>
                   </div>
@@ -432,8 +429,8 @@ export function Details() {
                         size={80}
                         level="M"
                         includeMargin={false}
-                        fgColor="#5B6655"
-                        bgColor="#ECE5DB"
+                        fgColor="var(--color-motif-deep)"
+                        bgColor="var(--color-motif-cream)"
                       />
                     </div>
                     <p className="text-[9px] sm:text-[10px] md:text-xs font-[family-name:var(--font-crimson)] text-motif-deep/60 italic text-center max-w-[80px]">
@@ -468,7 +465,7 @@ export function Details() {
               </div>
             </div>
           </div>
-        </div> */}
+        </div>
       </div>
 
       {/* Attire Information */}
@@ -513,7 +510,7 @@ export function Details() {
               {/* Principal sponsor attire image */}
               <div className="relative w-full aspect-[4/3] sm:aspect-[3/2] max-w-2xl mx-auto rounded-lg sm:rounded-xl overflow-hidden border border-motif-medium/30 mb-4 sm:mb-6 md:mb-8">
                 <Image
-                  src="/Details/Ninong & Ninang Dress Code.jpg"
+                  src={siteConfig.dressCode.sponsors.photo}
                   alt="Principal sponsor attire — follow the color palette"
                   fill
                   className="object-contain bg-[#FFF7F6]/50 p-2 sm:p-3"
@@ -522,8 +519,8 @@ export function Details() {
               </div>
 
               {/* Color palette for principal sponsors — keep explicit dress-code colors (not UI palette) */}
-              {/* <div className="flex justify-center gap-2 sm:gap-3 md:gap-4 flex-wrap mb-5 sm:mb-6 md:mb-7 px-2">
-                {siteConfig.dressCode.colors.split(',').map((color) => (
+              <div className="flex justify-center gap-2 sm:gap-3 md:gap-4 flex-wrap mb-5 sm:mb-6 md:mb-7 px-2">
+                {siteConfig.dressCode.sponsors.palette.split(',').map((color) => (
                   <div
                     key={color.trim()}
                     className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full shadow-md border border-white ring-2 ring-motif-silver/40 hover:scale-110 transition-transform duration-300"
@@ -531,14 +528,12 @@ export function Details() {
                     title={color.trim()}
                   />
                 ))}
-              </div> */}
+              </div>
               
               {/* Sponsors Dress Code Text */}
               <div className="text-center pt-3 sm:pt-4 border-t border-motif-silver/70 px-3 sm:px-4">
                 <p className="text-sm sm:text-base md:text-lg font-[family-name:var(--font-crimson)] text-motif-deep leading-relaxed mb-2">
-                  <span className="font-semibold">Ladies:</span> Formal long dress or gown, or Filipiniana in shades of beige
-                  <br />
-                  <span className="font-semibold">Gentlemen: </span> Barong Tagalog 
+                  <span className="font-semibold">{siteConfig.dressCode.sponsors.notes}</span>
                 </p>
                 {/* <p className="text-xs sm:text-sm md:text-base font-[family-name:var(--font-crimson)] text-motif-deep leading-relaxed mb-2">
                   <span className="font-semibold">Palette inspiration:</span> {siteConfig.dressCode.colors}
@@ -553,8 +548,8 @@ export function Details() {
         </div>
 
         {/* Attire Cards */}
-        <div className="space-y-5 sm:space-y-6 md:space-y-8">
-          {/* Principal Sponsor Attire */}
+        <div className="space-y-5 sm:space-y-6 md:space-y-8 mb-4">
+          {/* Guests Attire */}
           <div className="relative group">
             <div className="absolute -inset-1 bg-gradient-to-br from-motif-silver/22 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-lg" />
             
@@ -573,8 +568,8 @@ export function Details() {
               {/* Principal sponsor attire image */}
               <div className="relative w-full aspect-[4/3] sm:aspect-[3/2] max-w-2xl mx-auto rounded-lg sm:rounded-xl overflow-hidden border border-motif-medium/30 mb-4 sm:mb-6 md:mb-8">
                 <Image
-                  src="/Details/Guests Dress Code.jpg"
-                  alt="Principal sponsor attire — follow the color palette"
+                  src={siteConfig.dressCode.guests.photo}
+                  alt={siteConfig.dressCode.guests.notes}
                   fill
                   className="object-contain bg-[#FFF7F6]/50 p-2 sm:p-3"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 672px"
@@ -583,7 +578,7 @@ export function Details() {
 
               {/* Color palette for principal sponsors — keep explicit dress-code colors (not UI palette) */}
               <div className="flex justify-center gap-2 sm:gap-3 md:gap-4 flex-wrap mb-5 sm:mb-6 md:mb-7 px-2">
-                {siteConfig.dressCode.colors.split(',').map((color) => (
+                {siteConfig.dressCode.guests.palette.split(',').map((color) => (
                   <div
                     key={color.trim()}
                     className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full shadow-md border border-white ring-2 ring-motif-silver/40 hover:scale-110 transition-transform duration-300"
@@ -593,14 +588,14 @@ export function Details() {
                 ))}
               </div>
               
-              {/* Sponsors Dress Code Text */}
-              <div className="text-center pt-3 sm:pt-4 border-t border-motif-silver/70 px-3 sm:px-4">
+              {/* Guests Dress Code Text */}
+              <div className="text-center pt-3 sm:pt-4 border-t border-motif-silver/70 px-3 sm:px-4 mb-4">
                 <p className="text-sm sm:text-base md:text-lg font-[family-name:var(--font-crimson)] text-motif-deep leading-relaxed mb-2">
-                  <span className="font-semibold">Ladies:</span> Formal long dress/gown matching the color motif.
+                  <span className="font-semibold">{siteConfig.dressCode.guests.notes}</span>
                   <br />
-                  <span className="font-semibold">Gentlemen:</span> Suit, long sleeves matching the color motif 
+               
                 </p>
-                <div className="mt-3 sm:mt-4 text-left max-w-2xl mx-auto">
+                {/* <div className="mt-3 sm:mt-4 text-left max-w-2xl mx-auto">
                   <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
                     <span className="inline-flex h-2 w-2 rounded-full bg-motif-accent/80" aria-hidden="true" />
                     <p className={`${cinzel.className} text-[11px] sm:text-xs tracking-[0.22em] uppercase text-motif-deep/80`}>
@@ -629,7 +624,7 @@ export function Details() {
                       </p>
                     </li>
                   </ul>
-                </div>
+                </div> */}
                 {/* <p className="text-xs sm:text-sm md:text-base font-[family-name:var(--font-crimson)] text-motif-deep leading-relaxed italic">
                   {siteConfig.dressCode.note}
                 </p> */}

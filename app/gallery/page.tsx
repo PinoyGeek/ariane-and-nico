@@ -1,6 +1,5 @@
 import fs from "fs/promises"
 import path from "path"
-import sharp from "sharp"
 import Image from "next/image"
 import MasonryGallery from "@/components/masonry-gallery"
 import { siteConfig } from "@/content/site"
@@ -16,10 +15,10 @@ const cormorant = Cormorant_Garamond({
   weight: ["400", "500", "600"],
 })
 
-// Palette lives in globals.css → @theme inline → --color-motif-*
-// CSS filter approximation of --color-motif-deep (sage green). Tune if needed.
+// Match Details/Gallery palette
+const GALLERY_TEXT = "#9B6A41"
 const GALLERY_DECO_FILTER =
-  "brightness(0) saturate(100%) invert(37%) sepia(20%) saturate(500%) hue-rotate(80deg) brightness(88%) contrast(92%)"
+  "brightness(0) saturate(100%) invert(32%) sepia(55%) saturate(900%) hue-rotate(355deg) brightness(95%) contrast(90%)"
 
 // Generate on each request so newly added images in public/ appear without a rebuild
 export const dynamic = "force-dynamic"
@@ -43,38 +42,19 @@ async function getImagesFrom(dir: string) {
   }
 }
 
-async function getImageMetadata(src: string) {
-  const relativeSrc = src.startsWith("/") ? src.slice(1) : src
-  const absolutePath = path.join(process.cwd(), "public", relativeSrc)
-
-  try {
-    const metadata = await sharp(absolutePath).metadata()
-    const width = metadata.width ?? 1200
-    const height = metadata.height ?? 1500
-    const orientation =
-      width > height ? ("landscape" as const) : ("portrait" as const)
-
-    return { width, height, orientation }
-  } catch {
-    return { width: 1200, height: 1500, orientation: "portrait" as const }
-  }
-}
-
 export default async function GalleryPage() {
   const mobileImages = await getImagesFrom("mobile-background")
   const desktopImages = await getImagesFrom("desktop-background")
   const allImages = [...mobileImages, ...desktopImages]
-  const images = await Promise.all(allImages.map(async (src) => {
+  const images = allImages.map((src) => {
     const category = src.includes("mobile-background") ? "mobile" as const : "desktop" as const
-    const { width, height, orientation } = await getImageMetadata(src)
-
-    return { src, category, width, height, orientation }
-  }))
+    return { src, category }
+  })
 
   return (
-    <main className="min-h-screen relative overflow-hidden bg-motif-cream">
+    <main className="min-h-screen relative overflow-hidden bg-white">
       {/* Background */}
-      <div className="absolute inset-0 -z-10 bg-motif-cream" />
+      <div className="absolute inset-0 -z-10 bg-white" />
       
       {/* Flower decoration - top left corner */}
       <div className="absolute left-0 top-0 z-0 pointer-events-none">
@@ -133,27 +113,27 @@ export default async function GalleryPage() {
           {/* Decorative element above title - match Details/Gallery */}
           <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
             <div
-              className="w-8 sm:w-12 md:w-16 h-px"
-              style={{ background: 'linear-gradient(to right, transparent, color-mix(in srgb, var(--color-motif-accent) 40%, transparent), transparent)' }}
+              className="w-8 sm:w-12 md:w-16 h-px bg-gradient-to-r from-transparent to-transparent"
+              style={{ background: `linear-gradient(to right, transparent, ${GALLERY_TEXT}40, transparent)` }}
             />
-            <div className="w-1.5 h-1.5 rounded-full opacity-80 bg-motif-accent" />
-            <div className="w-1.5 h-1.5 rounded-full opacity-50 bg-motif-accent" />
-            <div className="w-1.5 h-1.5 rounded-full opacity-80 bg-motif-accent" />
+            <div className="w-1.5 h-1.5 rounded-full opacity-80" style={{ backgroundColor: GALLERY_TEXT }} />
+            <div className="w-1.5 h-1.5 rounded-full opacity-50" style={{ backgroundColor: GALLERY_TEXT }} />
+            <div className="w-1.5 h-1.5 rounded-full opacity-80" style={{ backgroundColor: GALLERY_TEXT }} />
             <div
-              className="w-8 sm:w-12 md:w-16 h-px"
-              style={{ background: 'linear-gradient(to right, transparent, color-mix(in srgb, var(--color-motif-accent) 40%, transparent), transparent)' }}
+              className="w-8 sm:w-12 md:w-16 h-px bg-gradient-to-r from-transparent to-transparent"
+              style={{ background: `linear-gradient(to right, transparent, ${GALLERY_TEXT}40, transparent)` }}
             />
           </div>
 
           <h1
             className={`${cinzel.className} text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal mb-2 sm:mb-3 md:mb-4`}
-            style={{ color: 'var(--color-motif-deep)' }}
+            style={{ color: GALLERY_TEXT }}
           >
             Our Love Story Gallery
           </h1>
           <p
             className={`${cormorant.className} text-xs sm:text-sm md:text-base lg:text-lg font-light max-w-xl mx-auto leading-relaxed px-2`}
-            style={{ color: 'var(--color-motif-medium)' }}
+            style={{ color: GALLERY_TEXT }}
           >
             Every photograph tells a story of {siteConfig.couple.groomNickname} & {siteConfig.couple.brideNickname}'s journey to
             forever
@@ -161,19 +141,19 @@ export default async function GalleryPage() {
 
           {/* Decorative element below subtitle */}
           <div className="flex items-center justify-center gap-2 mt-3 sm:mt-4">
-            <div className="w-1.5 h-1.5 rounded-full opacity-80 bg-motif-accent" />
-            <div className="w-1.5 h-1.5 rounded-full opacity-50 bg-motif-accent" />
-            <div className="w-1.5 h-1.5 rounded-full opacity-80 bg-motif-accent" />
+            <div className="w-1.5 h-1.5 rounded-full opacity-80" style={{ backgroundColor: GALLERY_TEXT }} />
+            <div className="w-1.5 h-1.5 rounded-full opacity-50" style={{ backgroundColor: GALLERY_TEXT }} />
+            <div className="w-1.5 h-1.5 rounded-full opacity-80" style={{ backgroundColor: GALLERY_TEXT }} />
           </div>
         </div>
 
         {images.length === 0 ? (
-          <div className={`${cormorant.className} text-center`} style={{ color: 'color-mix(in srgb, var(--color-motif-deep) 90%, transparent)' }}>
+          <div className={`${cormorant.className} text-center`} style={{ color: `${GALLERY_TEXT}e6` }}>
             <p className="font-light">
               No images found. Add files to{" "}
               <code
                 className="px-2 py-1 rounded border"
-                style={{ backgroundColor: 'color-mix(in srgb, var(--color-motif-deep) 6%, transparent)', borderColor: 'color-mix(in srgb, var(--color-motif-deep) 25%, transparent)', color: 'var(--color-motif-deep)' }}
+                style={{ backgroundColor: `${GALLERY_TEXT}10`, borderColor: `${GALLERY_TEXT}40`, color: GALLERY_TEXT }}
               >
                 public/mobile-background or public/desktop-background
               </code>
@@ -189,5 +169,3 @@ export default async function GalleryPage() {
     </main>
   )
 }
-
-

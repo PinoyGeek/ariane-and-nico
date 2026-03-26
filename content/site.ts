@@ -1,50 +1,58 @@
 export const siteConfig = {
   couple: {
-    bride: "Noenyl Bryle M. Gonzaga", //Noenyl Bryle M. Gonzaga
-    brideNickname: "Bryle ", //Ltryl
-    groom: "Ltryl B. Benitez", //Ltryl B. Benitez
-    groomNickname: "Ltryl", //Ltryl
+    bride: "Ronnie May Labordo", //Noenyl Bryle M. Gonzaga
+    brideNickname: "Nomay", //Ltryl
+    groom: "Kenneth Siman", //Ltryl B. Benitez
+    groomNickname: "Kenneth", //Ltryl
   },
   wedding: {
-    date: "May 18, 2026",
-    time: "3:00 PM",
-    venue: "Farm Hills Garden, Silang, Cavite",
+    date: "June 24, 2026",
+    time: "2:30 PM",
+    venue: "Our Lady of Lourdes Parish",
     tagline: "are getting married!",
     theme: "Our wedding palette is inspired by timeless elegance and warmth.Motif Colors: Champagne Gold, Soft Beige, Warm Soft Brown",
     motif: "#9CAA99, #C4D1E2, #8799A7, #997C76, #A9A9A9, #D5D1C8",
   },
   details: {
     rsvp: {
-      deadline: "April 10, 2026.",
-      contact: "Ltryl B. Benitez",
-      phone: "0936 815 3245",
+      deadline: "June 10, 2026.",
+      contact: "Kenneth Siman",
+      phone: "0927 815 3245",
     },
   },
   ceremony: {
-    location: "Farm Hills Garden, Silang, Cavite",
-    venue: "Farm Hills Garden, Silang, Cavite",
-    date: "May 18, 2026",
-    day: "Monday",
-    time: "3:00 PM",
+    location: "Our Lady of Lourdes Parish",
+    venue: "Our Lady of Lourdes Parish — Tagaytay",
+    date: "June 24, 2026",
+    day: "Wednesday",
+    time: "2:30 PM",
     entourageTime: "2:00 PM",
     guestsTime: "2:30 PM",
+    image: "/Details/ceremony.png",
   },
   reception: {
-    location: "Farm Hills Garden, Silang, Cavite",
-    venue: "Farm Hills Garden, Silang, Cavite",
-    date: "May 18, 2026",
+    location: "Infinity Tagaytay Events Place",
+    venue: "Infinity Tagaytay Events Place",
+    date: "June 24, 2026",
     time: "4:00 PM",
+    image: ["/Details/reception.png", "/Details/reception2.png"],
   },
   dressCode: {
       theme: "SEMI-FORMAL",
-    colors: "#9CAA99, #C4D1E2, #8799A7, #997C76, #A9A9A9, #D5D1C8",
+    colors: "#E8E0D5, #D1AD97, #C49E92, #C19A83, #9A7A6B",
     sponsors: {
       male: "Guests are kindly requested to wear attire in any of the shades within our wedding palette.Color pallet and image to be followed. STRICTLY no shorts, maong jeans, t-shirts, or slippers.",
-      female: "Guests are kindly requested to wear attire in any of the shades within our wedding palette.Color pallet and image to be followed. STRICTLY no shorts, maong jeans, t-shirts, or slippers."
+      female: "Guests are kindly requested to wear attire in any of the shades within our wedding palette.Color pallet and image to be followed. STRICTLY no shorts, maong jeans, t-shirts, or slippers.",
+      notes: "Barong Tagalog and Long Gowns in curated shades of brown",
+      photo: "/Details/sponsors.png",
+      palette: "#E8E0D5, #D1AD97, #C49E92, #C19A83, #9A7A6B"
     },
     guests: {
       gents: "Guests are kindly requested to wear attire in any of the shades within our wedding palette.Color pallet and image to be followed. STRICTLY no shorts, maong jeans, t-shirts, or slippers.",
-      ladies: "Guests are kindly requested to wear attire in any of the shades within our wedding palette.Color pallet and image to be followed. STRICTLY no shorts, maong jeans, t-shirts, or slippers."
+      ladies: "Guests are kindly requested to wear attire in any of the shades within our wedding palette.Color pallet and image to be followed. STRICTLY no shorts, maong jeans, t-shirts, or slippers.",
+      notes: "Barong Tagalog and Long Gowns in curated shades of brown",
+      photo: "/Details/guest.png",
+      palette: "#E8E0D3, #D1AD97, #C49F90, #F7CDCF, #DDB2AC"
     },
     note: "We kindly request our guests to dress in attire following our wedding palette."
   },

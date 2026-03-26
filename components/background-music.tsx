@@ -37,7 +37,8 @@ const BackgroundMusic = () => {
     tryAutoplay()
 
     return () => {
-      audioRef.current?.pause()
+      // Do NOT pause here — the audio element lives in the root layout and
+      // must keep playing across client-side navigations.
       document.removeEventListener("click", handleUserInteraction)
       document.removeEventListener("touchstart", handleUserInteraction)
     }

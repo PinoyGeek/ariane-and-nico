@@ -35,7 +35,7 @@ const faqItems: FAQItem[] = [
   {
     question: "When is the wedding?",
     answer:
-    `Our wedding will be held on May 18, 2026 (Monday)`
+    `Our wedding will be held on ${siteConfig.ceremony.date} (${siteConfig.ceremony.day})`
   },
   {
     question: "What time should I arrive for the ceremony?",
@@ -45,27 +45,17 @@ const faqItems: FAQItem[] = [
   {
     question: "Where will the ceremony and reception take place?",
     answer:
-    `The ceremony and reception will be held at Farm Hills Garden, Silang, Cavite. You can find detailed directions, addresses, and maps in the Details Section above`
+    `The ceremony and reception will be held at ${siteConfig.ceremony.location}, ${siteConfig.ceremony.venue}. You can find detailed directions, addresses, and maps in the Details Section above`
   },
   {
     question: "Is there an entourage call time?",
     answer:
-    `Yes. We request our Principal Sponsors to arrive at 2:30 PM so we can prepapre and settle before the ceremony begins`
+    `Yes. We request our Principal Sponsors to arrive at ${siteConfig.ceremony.entourageTime} so we can prepapre and settle before the ceremony begins`
   },
   {
     question: "How do I RSVP?",
     answer:
-    `Please RSVP through the RSVP section on this invitation. Simply search for your name in the guest list and confirm your attendance. Due Date of final RSVP is on April 10, 2026. For any questions, please contact Ltryl or Bryle via Messenger`
-  },
-  {
-    question: "Can I bring a guest or a date?",
-    answer:
-      "If your invitation includes a plus one or lists your guest’s name, you are welcome to bring them. Otherwise, we would love to keep our wedding intimate and reserved for close family and friends, so we kindly ask guests not to bring additional companions.",
-  },
-  {
-    question: "Is there a dress code?",
-    answer:
-    `Wedding attire details are in the Attire Guidelines section above. We kindly request our guests to dress in attire following our wedding palette`
+    `Please RSVP through the RSVP section on this invitation. Simply search for your name in the guest list and confirm your attendance. Due Date of final RSVP is on ${siteConfig.details.rsvp.deadline}. For any questions, please contact ${siteConfig.details.rsvp.contact} via Messenger`
   },
   {
     question: "Can I sit anywhere at the reception?",
@@ -194,10 +184,9 @@ export function FAQ() {
       {/* FAQ content — cream container with motif accents */}
       <div className="relative z-30 max-w-4xl mx-auto px-3 sm:px-5">
         <div
-          className="relative backdrop-blur-md rounded-xl sm:rounded-2xl overflow-hidden border shadow-lg"
+          className="relative backdrop-blur-md rounded-xl sm:rounded-2xl overflow-hidden shadow-lg"
           style={{
             backgroundColor: 'color-mix(in srgb, var(--color-motif-cream) 94%, transparent)',
-            borderColor: 'color-mix(in srgb, var(--color-motif-silver) 44%, transparent)',
             boxShadow: '0 4px 28px color-mix(in srgb, var(--color-motif-deep) 10%, transparent)',
           }}
         >
@@ -212,7 +201,8 @@ export function FAQ() {
                     className="rounded-xl sm:rounded-2xl border overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md"
                     style={{
                       backgroundColor: 'color-mix(in srgb, var(--color-motif-cream) 96%, white)',
-                      borderColor: 'color-mix(in srgb, var(--color-motif-silver) 33%, transparent)',
+                      // borderColor: 'color-mix(in srgb, var(--color-motif-silver) 33%, transparent)',
+                      boxShadow: '0 4px 28px color-mix(in srgb, var(--color-motif-deep) 10%, transparent)',
                     }}
                   >
                     <button
@@ -245,7 +235,7 @@ export function FAQ() {
                       <div className="overflow-hidden">
                         <div
                           className="px-2.5 sm:px-3 md:px-4 lg:px-5 py-2 sm:py-2.5 md:py-3 lg:py-4 border-t"
-                          style={{ backgroundColor: 'color-mix(in srgb, var(--color-motif-cream) 90%, transparent)', borderColor: 'color-mix(in srgb, var(--color-motif-silver) 25%, transparent)' }}
+                          style={{ backgroundColor: 'color-mix(in srgb, var(--color-motif-cream) 90%, transparent)', borderColor: 'color-mix(in srgb, var(--color-motif-deep) 25%, transparent)' }}
                         >
                           {item.answer.includes("[RSVP_LINK]") ? (
                             <p className={`${cormorant.className} font-medium leading-relaxed sm:leading-loose text-xs sm:text-sm md:text-base lg:text-lg whitespace-pre-line tracking-wide`} style={{ color: palette.deep }}>
