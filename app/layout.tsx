@@ -176,8 +176,8 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet" />
         <link rel="preload" as="image" href={mobileHero} media="(max-width: 767px)" />
         <link rel="preload" as="image" href={desktopHero} media="(min-width: 768px)" />
-        <link rel="preload" as="image" href="/Details/St. Augustine Parish Church.jpg" />
-        <link rel="preload" as="image" href="/Details/La Mariposa Tagaytay Events Place.jpg" />
+        <link rel="preload" as="image" href="/Details/ceremony.png" />
+        <link rel="preload" as="image" href="/Details/reception.png" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
       <body

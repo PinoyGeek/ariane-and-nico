@@ -26,21 +26,17 @@ const cinzel = Cinzel({
 })
 
 const galleryItems = [
-  { image: "/mobile-background/couple (28).webp", text: " " },
-  { image: "/mobile-background/couple (29).webp", text: " " },
-  { image: "/mobile-background/couple (30).webp", text: " " },
-  { image: "/mobile-background/couple (31).webp", text: " " },
-  { image: "/mobile-background/couple (32).webp", text: " " },
-  { image: "/mobile-background/couple (33).webp", text: " " },
-  { image: "/mobile-background/couple (34).webp", text: " " },
-  { image: "/mobile-background/couple (35).webp", text: " " },
-  { image: "/mobile-background/couple (36).webp", text: " " },
-  { image: "/mobile-background/couple (37).webp", text: " " },
-  { image: "/mobile-background/couple (38).webp", text: " " },
-  { image: "/mobile-background/couple (39).webp", text: " " },
-  { image: "/mobile-background/couple (40).webp", text: " " },
-  { image: "/mobile-background/couple (41).webp", text: " " },
-  { image: "/mobile-background/couple (42).webp", text: " " },
+  { image: "/mobile-background/couple (10).webp", text: " " },
+  { image: "/mobile-background/couple (11).webp", text: " " },
+  { image: "/mobile-background/couple (12).webp", text: " " },
+  { image: "/mobile-background/couple (13).webp", text: " " },
+  { image: "/mobile-background/couple (14).webp", text: " " },
+  { image: "/mobile-background/couple (15).webp", text: " " },
+  { image: "/mobile-background/couple (16).webp", text: " " },
+  { image: "/mobile-background/couple (17).webp", text: " " },
+  { image: "/mobile-background/couple (18).webp", text: " " },
+  { image: "/mobile-background/couple (19).webp", text: " " },
+  { image: "/mobile-background/couple (20).webp", text: " " },
 
 
 ]
