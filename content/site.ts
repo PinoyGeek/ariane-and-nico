@@ -4,7 +4,7 @@ export const siteConfig = {
     brideNickname: "Era", //Ltryl
     groom: "Vincent Ivan M. Ferrer", //Ltryl B. Benitez
     groomNickname: "Vince",
-    monogram:"/monogram/monogram.png" ,//Ltryl
+    monogram:"/monogram/newMonogram.png" ,//Ltryl
     backgroundMusic:"/background_music/Ed Sheeran - The Joker And The Queen (Lyrics) feat. Taylor Swift.mp3"
   },
   googleAPI:{
@@ -36,15 +36,15 @@ export const siteConfig = {
   giftRegistry: {
     QR_1:{
     id: "Gcash",
-    src: "/QR/Gcash.png",
+    src: "/QR/NewQRgcash.png",
     label: "Gcash",
-    accountNumber: "Gcash: Ma. Geraldine B. Divina",
+    accountNumber: "Gcash: M* GE******E D.",
     },
     QR_2:{
     id: "Landbank",
-    src: "/QR/LandBank.png",
+    src: "/QR/newLandBank.png",
     label: "Landbank",
-    accountNumber: "Landbank: Ma. Geraldine B. Divina",
+    accountNumber: "Landbank: Vincent Ivan M. Ferrer",
     }
   },
   ceremony: {

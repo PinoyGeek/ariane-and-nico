@@ -1,0 +1,13 @@
+#!/bin/sh
+# Sync public/ image changes (additions and deletions) to Cloudinary on commit.
+
+IMAGE_PATTERN="\.(jpg|jpeg|png|webp|gif|avif|svg)$"
+
+CHANGED=$(git diff --cached --name-only --diff-filter=ACDR | grep -E "^public/" | grep -iE "$IMAGE_PATTERN" || true)
+
+if [ -z "$CHANGED" ]; then
+  exit 0
+fi
+
+echo "☁️  Image changes detected in public/ — syncing to Cloudinary..."
+node --env-file=.env.local --import tsx/esm scripts/sync-cloudinary.ts

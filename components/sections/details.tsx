@@ -86,7 +86,7 @@ export function Details() {
   const ceremonyVenueDetail = ""
   const ceremonyAddress = siteConfig.ceremony.venue
   const ceremonyVenue = `${ceremonyVenueName}, ${ceremonyAddress}`
-  const ceremonyMapsLink = `https://maps.app.goo.gl/aV2PgzJ1VwF6ZKr18`
+  const ceremonyMapsLink = `https://maps.google.com/?q=${encodeURIComponent(ceremonyVenueName)}`
 
   const receptionVenueName = siteConfig.reception.location
   const receptionVenueDetail = ""

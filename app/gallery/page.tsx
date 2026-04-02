@@ -23,18 +23,18 @@ const GALLERY_DECO_FILTER =
 // Generate on each request so newly added images in public/ appear without a rebuild
 export const dynamic = "force-dynamic"
 
-async function getImagesFrom(dir: string) {
-  const abs = path.join(process.cwd(), "public", dir)
+async function getGalleryImages() {
+  const abs = path.join(process.cwd(), "public", "gallery")
   try {
     const entries = await fs.readdir(abs, { withFileTypes: true })
     return entries
       .filter((e) => e.isFile())
-      .map((e) => `/${dir}/${e.name}`)
+      .map((e) => `/gallery/${e.name}`)
       .filter((p) => p.match(/\.(jpe?g|png|webp|gif)$/i))
       .sort((a, b) => {
         // Extract numeric part from filename for proper numerical sorting
-        const numA = parseInt(a.match(/\/(\d+)\./)?.[1] || "0", 10)
-        const numB = parseInt(b.match(/\/(\d+)\./)?.[1] || "0", 10)
+        const numA = parseInt(a.match(/\((\d+)\)/)?.[1] || "0", 10)
+        const numB = parseInt(b.match(/\((\d+)\)/)?.[1] || "0", 10)
         return numA - numB
       })
   } catch {
@@ -43,13 +43,14 @@ async function getImagesFrom(dir: string) {
 }
 
 export default async function GalleryPage() {
-  const mobileImages = await getImagesFrom("mobile-background")
-  const desktopImages = await getImagesFrom("desktop-background")
-  const allImages = [...mobileImages, ...desktopImages]
-  const images = allImages.map((src) => {
-    const category = src.includes("mobile-background") ? "mobile" as const : "desktop" as const
-    return { src, category }
-  })
+  const allImages = await getGalleryImages()
+  const images = allImages.map((src) => ({
+    src,
+    category: "gallery" as const,
+    width: 1200,
+    height: 900,
+    orientation: "landscape" as const,
+  }))
 
   return (
     <main className="min-h-screen relative overflow-hidden bg-white">
@@ -155,7 +156,7 @@ export default async function GalleryPage() {
                 className="px-2 py-1 rounded border"
                 style={{ backgroundColor: `${GALLERY_TEXT}10`, borderColor: `${GALLERY_TEXT}40`, color: GALLERY_TEXT }}
               >
-                public/mobile-background or public/desktop-background
+                public/gallery
               </code>
               .
             </p>

@@ -28,9 +28,9 @@ export function CoupleVideo() {
   const playerRef = useRef<any>(null)
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const { pauseMusic, resumeMusic } = useAudio()
-  // https://youtube.com/shorts/TLCE9Xee2-s
+  // https://youtu.be/n1eiNPQPKig
   // YouTube video ID
-  const videoId = "TLCE9Xee2-s"
+  const videoId = "n1eiNPQPKig"
 
   // Load YouTube IFrame API
   useEffect(() => {
@@ -243,7 +243,7 @@ export function CoupleVideo() {
                   >
                     {/* Custom poster image */}
                     <CloudinaryImage
-                      src="/desktop-background/couple-12.webp"
+                      src="/Details/LinkPreview.jpg"
                       alt="Video thumbnail"
                       fill
                       className="object-cover transform group-hover:scale-105 transition-transform duration-500"
