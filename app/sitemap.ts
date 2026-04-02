@@ -1,27 +1,29 @@
 import type { MetadataRoute } from "next"
 
+const BASE_URL = "https://vince-and-era.weddinginvitationrsvp.com"
+
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: "https://cassly-mark-wedding.vercel.app",
+      url: BASE_URL,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: "https://cassly-mark-wedding.vercel.app#countdown",
+      url: `${BASE_URL}#countdown`,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.8,
     },
     {
-      url: "https://cassly-mark-wedding.vercel.app#gallery",
+      url: `${BASE_URL}#gallery`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.7,
     },
     {
-      url: "https://cassly-mark-wedding.vercel.app#rsvp",
+      url: `${BASE_URL}#rsvp`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
