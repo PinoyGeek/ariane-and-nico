@@ -150,12 +150,11 @@ Both from Taguig (convenient 👀), Vince—who was staying at the DA dorm—sta
         theme="dark"
         layout="image-right"
         imageSrc="/frontboxes/box-2.jpg"
-        title="The GMA-Kamuning Moment"
+        title="The Q.Ave MRT Moment"
         text={
           <>
             <p>
-            And then came one of the most unforgettable moments of their story—
-GMA-Kamuning Station.
+            And then came one of the most unforgettable moments of their story— Q. Ave Station.
 <br />
 <br />
 Out of nowhere, Era said:
@@ -185,7 +184,7 @@ Hindi panandalian.
         theme="light"
         layout="image-left"
         isLast={true}
-        imageSrc="/frontboxes/box-2.jpg"
+        imageSrc="/frontboxes/image-1679956003007106.jpg"
         title="A Lifetime Choice"
         text={
           <>
@@ -236,4 +235,3 @@ Her home.
     </div>
   );
 }
-
