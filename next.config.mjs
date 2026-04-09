@@ -32,7 +32,7 @@ const nextConfig = {
       '@radix-ui/react-select',
     ],
   },
-  serverExternalPackages: ['cloudinary'],
+  serverExternalPackages: ['cloudinary', 'sharp'],
   headers: async () => {
     const isDevelopment = process.env.NODE_ENV === 'development';
     

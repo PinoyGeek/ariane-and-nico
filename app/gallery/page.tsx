@@ -1,6 +1,4 @@
-import fs from "fs/promises"
-import path from "path"
-import sharp from "sharp"
+import { v2 as cloudinary } from "cloudinary"
 import MasonryGallery from "@/components/masonry-gallery"
 import { CloudinaryImage } from "@/components/ui/cloudinary-image"
 import { siteConfig } from "@/content/site"
@@ -21,37 +19,38 @@ const GALLERY_TEXT = "#9B6A41"
 const GALLERY_DECO_FILTER =
   "brightness(0) saturate(100%) invert(32%) sepia(55%) saturate(900%) hue-rotate(355deg) brightness(95%) contrast(90%)"
 
-// Generate on each request so newly added images in public/ appear without a rebuild
+const PROJECT_PREFIX = "wedding-projects/ariane-and-nico"
+
+// Re-fetch on every request so newly uploaded images appear without a rebuild
 export const dynamic = "force-dynamic"
 
-async function getImagesFrom(dir: string) {
-  const abs = path.join(process.cwd(), "public", dir)
+cloudinary.config({
+  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+})
+
+async function getCloudinaryImages(folder: string) {
   try {
-    const entries = await fs.readdir(abs, { withFileTypes: true })
-    const paths = entries
-      .filter((e) => e.isFile())
-      .map((e) => `/${dir}/${e.name}`)
-      .filter((p) => p.match(/\.(jpe?g|png|webp|gif)$/i))
+    const result = await cloudinary.api.resources({
+      type: "upload",
+      prefix: `${PROJECT_PREFIX}/${folder}`,
+      max_results: 500,
+      resource_type: "image",
+    })
+
+    return (result.resources as Array<{
+      public_id: string
+      width: number
+      height: number
+    }>)
       .sort((a, b) => {
-        // Extract the first number found in the filename for proper numerical sorting
-        const numA = parseInt(a.match(/(\d+)/)?.[1] || "0", 10)
-        const numB = parseInt(b.match(/(\d+)/)?.[1] || "0", 10)
+        // Numerical sort by the first number found in the public_id
+        const numA = parseInt(a.public_id.match(/(\d+)/)?.[1] ?? "0", 10)
+        const numB = parseInt(b.public_id.match(/(\d+)/)?.[1] ?? "0", 10)
         return numA - numB
       })
-
-    // Read real dimensions for each image so the grid respects orientation
-    const withDimensions = await Promise.all(
-      paths.map(async (src) => {
-        try {
-          const filePath = path.join(process.cwd(), "public", src.replace(/^\//, ""))
-          const meta = await sharp(filePath).metadata()
-          return { src, width: meta.width ?? 4, height: meta.height ?? 5 }
-        } catch {
-          return { src, width: 4, height: 5 }
-        }
-      })
-    )
-    return withDimensions
+      .map(({ public_id, width, height }) => ({ src: public_id, width, height }))
   } catch {
     return []
   }
@@ -59,8 +58,8 @@ async function getImagesFrom(dir: string) {
 
 export default async function GalleryPage() {
   const [mobileImages, desktopImages] = await Promise.all([
-    getImagesFrom("mobile-background"),
-    getImagesFrom("desktop-background"),
+    getCloudinaryImages("mobile-background"),
+    getCloudinaryImages("desktop-background"),
   ])
 
   const images = [
@@ -79,6 +78,7 @@ export default async function GalleryPage() {
       orientation: (height >= width ? "portrait" : "landscape") as "portrait" | "landscape",
     })),
   ]
+
 
   return (
     <main className="min-h-screen relative overflow-hidden bg-white">
