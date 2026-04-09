@@ -1,6 +1,6 @@
 import fs from "fs"
 import path from "path"
-import sharp from "sharp"
+import { imageSize } from "image-size"
 import MasonryGallery from "@/components/masonry-gallery"
 import { CloudinaryImage } from "@/components/ui/cloudinary-image"
 import { siteConfig } from "@/content/site"
@@ -25,8 +25,8 @@ const GALLERY_DECO_FILTER =
 const VALID_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif", ".gif"])
 
 /**
- * Reads images from a public/ sub-folder, verifies each file is readable,
- * extracts real dimensions via sharp, and returns them sorted by the number
+ * Reads images from a public/ sub-folder, extracts real dimensions via image-size,
+ * and returns them sorted by the number
  * in parentheses in the filename (e.g. "couple (3).jpg" → 3).
  * Files that cannot be read or lack dimension metadata are silently skipped.
  */
@@ -49,10 +49,8 @@ async function getLocalImages(folder: string) {
     imageFilenames.map(async (filename) => {
       const filePath = path.join(dirPath, filename)
       try {
-        // Confirm file is readable before attempting to decode
-        await fs.promises.access(filePath, fs.constants.R_OK)
-        const { width, height } = await sharp(filePath).metadata()
-        // Skip if sharp couldn't determine dimensions
+        const buffer = await fs.promises.readFile(filePath)
+        const { width, height } = imageSize(buffer)
         if (!width || !height) return null
         return { src: `/${folder}/${filename}`, width, height }
       } catch {
