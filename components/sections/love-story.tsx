@@ -9,6 +9,7 @@ const cinzel = Cinzel({
   weight: "400",
 })
 
+
 // Palette lives in globals.css → @theme inline → --color-motif-*
 // Edit there once to update every component.
 
@@ -70,7 +71,7 @@ What began as a passing connection slowly unfolded into a friendship neither of 
         theme="light"
         layout="image-left"
         isLast={true}
-        imageSrc="/mobile-background/couple (12).JPG"
+        imageSrc="/frontboxes/couple (56).JPG"
         // title="Just Work… or So They Say"
         text={
           <>
@@ -101,7 +102,7 @@ What began as a passing connection slowly unfolded into a friendship neither of 
         theme="light"
         layout="image-left"
         isLast={true}
-        imageSrc="/mobile-background/couple (14).JPG"
+        imageSrc="/mobile-background/couple (19).JPG"
         // title="Sabay-Uwi Chronicles"
         text={
           <>
@@ -132,7 +133,7 @@ What began as a passing connection slowly unfolded into a friendship neither of 
         theme="light"
         layout="image-left"
         isLast={true}
-        imageSrc="/mobile-background/couple (19).JPG"
+        imageSrc="/mobile-background/couple (48).JPG"
         // title="A Lifetime Choice"
         text={
           <>
