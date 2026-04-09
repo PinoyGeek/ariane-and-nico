@@ -16,8 +16,9 @@ const eventImageUrl = `${canonicalUrl}${desktopHero}`
 // Hardcoded Cloudinary URL — image is already uploaded and always accessible via CDN.
 // f_jpg forces JPEG so all OG scrapers (iMessage, Viber, Facebook, etc.) can display it.
 // The public-folder URL is kept only as a fallback in the images array below.
+https://res.cloudinary.com/detbgvt1c/image/upload/v1775732605/wedding-projects/nico-and-ariane/Details/DetailsPreview.jpg
 const OG_IMAGE_CLOUDINARY =
-  "https://res.cloudinary.com/detbgvt1c/image/upload/f_jpg,q_auto,w_1200,h_630,c_fill/wedding-projects/ariane-and-nico/Details/DetailsPreview.jpg"
+  "https://res.cloudinary.com/detbgvt1c/image/upload/v1775732605/wedding-projects/nico-and-ariane/Details/DetailsPreview.jpg"
 const OG_IMAGE_FALLBACK = `${canonicalUrl}${desktopHero}`
 
 const coupleNames = `${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname}`
