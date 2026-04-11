@@ -5,7 +5,7 @@ export const siteConfig = {
     groom: "Mark Nicolie Bayonito", //Ltryl B. Benitez
     groomNickname: "Nico",
     monogram:"/monogram/monogram.png" ,//Ltryl
-    // backgroundMusic:"/background_music/Your Love - Juris  Piano Cover by Gerard Chua.mp3"
+    backgroundMusic:"/background_music/Your Love - Juris  Piano Cover by Gerard Chua.mp3"
   },
   googleAPI:{
     messageForm: "https://docs.google.com/forms/d/e/1FAIpQLSfZJzbDRiV8R88fyNyefRGsz4mtUeQ9T8SrKPuKyGD18hTuPA/formResponse", //done
