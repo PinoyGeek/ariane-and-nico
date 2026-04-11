@@ -137,14 +137,14 @@ export default function GalleryPage() {
                 className="px-2 py-1 rounded border"
                 style={{ backgroundColor: `${GALLERY_TEXT}10`, borderColor: `${GALLERY_TEXT}40`, color: GALLERY_TEXT }}
               >
-                public/mobile-background
+                public/mobile-background-new
               </code>{" "}
               or{" "}
               <code
                 className="px-2 py-1 rounded border"
                 style={{ backgroundColor: `${GALLERY_TEXT}10`, borderColor: `${GALLERY_TEXT}40`, color: GALLERY_TEXT }}
               >
-                public/desktop-background
+                public/desktop-background-new
               </code>
               .
             </p>

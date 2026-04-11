@@ -11,12 +11,12 @@ interface LoadingScreenProps {
 
 // Countdown boxes with color photos - numbers show days, hours, minutes
 const COUNTDOWN_BOXES = [
-  { src: '/frontboxes/box (1).JPG' },
+  { src: '/frontboxes/new-box (2).jpg' },
   { src: '/frontboxes/box (2).JPG' },
-  { src: '/frontboxes/box (3).JPG' },
+  { src: '/frontboxes/new-box (1).jpg' },
 ];
 
-const MAIN_BW_IMAGE = '/frontboxes/newMobile.JPG';
+const MAIN_BW_IMAGE = '/mobile-background-new/couple (43).JPG';
 const DESKTOP_BW_IMAGE = '/frontboxes/desktop.JPG';
 const STAGGER_DELAY_MS = 4000; // Each image appears every 4 seconds
 const BOX_TRANSITION_MS = 1200; // Slow, smooth transition
@@ -136,11 +136,19 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
           sizes="100vw"
           priority
         />
-        {/* Gradient overlay for readability and warmth */}
+        {/* Gradient overlay — darkens top & bottom so text is legible */}
         <div
           className="absolute inset-0"
           style={{
-            background: `linear-gradient(180deg, var(--color-motif-deep)40 0%, transparent 25%, transparent 75%, var(--color-motif-deep)55 100%)`,
+            background: `linear-gradient(
+              to bottom,
+              rgba(78, 59, 49, 0.75) 0%,
+              rgba(78, 59, 49, 0.35) 18%,
+              transparent 35%,
+              transparent 62%,
+              rgba(78, 59, 49, 0.45) 80%,
+              rgba(78, 59, 49, 0.80) 100%
+            )`,
           }}
         />
       </div>

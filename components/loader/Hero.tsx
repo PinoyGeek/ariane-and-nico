@@ -34,11 +34,11 @@ const desktopImages: string[] = [
 ];
 
 const mobileImages: string[] = [
-'/mobile-background/couple (49).JPG',
-  '/mobile-background/couple (50).JPG',
-  '/mobile-background/couple (55).JPG',
-  '/mobile-background/couple (19).JPG',
-  '/mobile-background/couple (18).JPG'
+'/mobile-background-new/couple (19).JPG',
+  '/mobile-background-new/couple (35).JPG',
+  '/mobile-background-new/couple (39).JPG',
+  '/mobile-background-new/couple (41).jpg',
+  '/mobile-background-new/couple (9).JPG'
 ];
 
 export const Hero: React.FC<HeroProps> = ({ onOpen, visible }) => {

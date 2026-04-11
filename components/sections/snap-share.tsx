@@ -263,7 +263,7 @@ export function SnapShare() {
                     whileHover={{ scale: 1.03 }}
                     transition={{ duration: 0.25 }}
                   >
-                    <CloudinaryImage src="/mobile-background/couple (18).JPG" alt="Wedding moment 1" fill className="object-cover" style={{ imageOrientation: "from-image" }} />
+                    <CloudinaryImage src="/mobile-background-new/couple (10).JPG" alt="Wedding moment 1" fill className="object-cover" style={{ imageOrientation: "from-image" }} />
                   </motion.div>
                   <motion.div
                     className="relative aspect-square rounded-lg sm:rounded-xl overflow-hidden shadow-md border-2 border-[#C44569]/30 hover:border-[#C44569]/50 transition-all"
@@ -277,7 +277,7 @@ export function SnapShare() {
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.25 }}
                   >
-                    <CloudinaryImage src="/desktop-background/couple (52).JPG" alt="Wedding moment 3" fill className="object-cover" />
+                    <CloudinaryImage src="/desktop-background-new/couple (37).JPG" alt="Wedding moment 3" fill className="object-cover" />
                   </motion.div>
                 </div>
                 <p

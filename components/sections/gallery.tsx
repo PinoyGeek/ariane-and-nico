@@ -39,12 +39,12 @@ const palette = {
 const galleryHashtag = siteConfig.snapShare.hashtag
 
 const galleryItems = [
-  { image: "/mobile-background/couple (55).JPG", text: " " },
-  { image: "/mobile-background/couple (6).JPG", text: " " },
+  { image: "/mobile-background-new/couple (33).jpg", text: " " },
+  { image: "/mobile-background-new/couple (44).JPG", text: " " },
   { image: "/mobile-background/couple (43).JPG", text: " " },
-  { image: "/mobile-background/couple (36).jpg", text: " " },
-  { image: "/mobile-background/couple (47).JPG", text: " " },
-  { image: "/mobile-background/couple (48).JPG", text: " " },
+  { image: "/mobile-background-new/couple (31).jpg", text: " " },
+  { image: "/mobile-background-new/couple (4).JPG", text: " " },
+  { image: "/mobile-background-new/couple (38).JPG", text: " " },
 ]
 
 export function Gallery() {
@@ -264,7 +264,7 @@ export function Gallery() {
                         alt={item.text || `Gallery image ${index + 1}`}
                         fill
                         sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw"
-                        className="object-cover object-top transition-transform duration-500 group-hover:scale-110"
+                        className="object-cover object-bottom transition-transform duration-500 group-hover:scale-110"
                         quality={90}
                         loading="lazy"
                       />

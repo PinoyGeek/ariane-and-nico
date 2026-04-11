@@ -1,6 +1,6 @@
 /**
- * Generates lib/generated/image-manifest.json by scanning public/mobile-background
- * and public/desktop-background for images and extracting their dimensions.
+ * Generates lib/generated/image-manifest.json by scanning public/mobile-background-new
+ * and public/desktop-background-new for images and extracting their dimensions.
  *
  * Run:  pnpm run generate-manifest
  * Auto: runs as "prebuild" before every `next build` (including Vercel deploys).
@@ -68,8 +68,8 @@ async function main() {
   console.log("Generating image manifest...")
 
   const [mobileImages, desktopImages] = await Promise.all([
-    getLocalImages("mobile-background", "mobile"),
-    getLocalImages("desktop-background", "desktop"),
+    getLocalImages("mobile-background-new", "mobile"),
+    getLocalImages("desktop-background-new", "desktop"),
   ])
 
   const images = [...mobileImages, ...desktopImages]
