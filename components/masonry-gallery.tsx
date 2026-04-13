@@ -87,19 +87,21 @@ export default function MasonryGallery({ images }: { images: ImageItem[] }) {
             >
               ‹
             </button>
-            <div className="relative max-h-[80vh] w-auto">
+            <div className="flex items-center justify-center">
               <CloudinaryImage
                 src={filtered[lightboxIdx].src}
                 alt=""
                 width={filtered[lightboxIdx].width}
                 height={filtered[lightboxIdx].height}
-                className="max-h-[80vh] w-auto rounded-xl shadow-2xl border border-[#606C60]/30 object-contain"
+                className="rounded-xl shadow-2xl border border-[#606C60]/30 object-contain"
+                style={{
+                  maxHeight: "80vh",
+                  width: "auto",
+                  height: "auto",
+                  maxWidth: "100%",
+                }}
                 quality={95}
                 priority={true}
-                style={{
-                  imageRendering: 'high-quality',
-                  WebkitImageRendering: 'high-quality',
-                }}
               />
             </div>
             <button
